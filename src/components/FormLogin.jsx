@@ -33,10 +33,10 @@ const FormLogin = () => {
         {renderLabelInput('insira o email', 'email', 'email', 'emailGravatar', 'input-gravatar-email')}
         {renderLabelInput('insira o nome', 'text', 'name', 'name', 'input-player-name')}
         <input
-          value='jogar'
-          id='jogar'
-          type='button'
-          dataTestid='btn-play'
+          value="jogar"
+          id="jogar"
+          type="button"
+          dataTestid="btn-play"
           onClick={() => dispatch(logInto(user))}
         />
       </form>

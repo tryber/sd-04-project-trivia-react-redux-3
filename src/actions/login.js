@@ -4,8 +4,8 @@ export const LOG_INTO = 'LOG_INTO';
 
 export const logInto = (login) => {
   return {
-    ...login,
     type: LOG_INTO,
+    ...login,
     urlGravatar: cryptEmail(login.emailGravatar),
   };
 };
