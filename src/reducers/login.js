@@ -2,9 +2,13 @@ import { LOG_INTO } from '../actions/login';
 
 const INITIAL_STATE = {
   isLogged: false,
-  name: '',
-  emailGravatar: '',
   urlGravatar: 'https://www.gravatar.com/avatar/',
+  player: {
+    name: '',
+    assertions: 0,
+    score: 0,
+    gravatarEmail: '',
+},
 };
 
 const login = (state = INITIAL_STATE, action) => {
@@ -14,9 +18,13 @@ const login = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLogged: true,
-        name: action.name,
-        emailGravatar: action.emailGravatar,
         urlGravatar: action.urlGravatar,
+        player: {
+          name: action.name,
+          assertions: 0,
+          score: 0,
+          gravatarEmail: action.emailGravatar,
+      },
       };
     default:
       return state;
