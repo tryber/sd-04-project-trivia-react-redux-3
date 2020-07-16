@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { logInto } from "../actions/login";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { logInto } from '../actions/login';
 
 const FormLogin = () => {
   const [user, setUser] = useState({
-    name: "",
-    emailGravatar: "",
+    name: '',
+    emailGravatar: '',
   });
   const dispatch = useDispatch();
 
@@ -30,25 +30,13 @@ const FormLogin = () => {
   return (
     <>
       <form>
-        {renderLabelInput(
-          "insira o email",
-          "email",
-          "email",
-          "emailGravatar",
-          "input-gravatar-email"
-        )}
-        {renderLabelInput(
-          "insira o nome",
-          "text",
-          "name",
-          "name",
-          "input-player-name"
-        )}
+        {renderLabelInput('insira o email', 'email', 'email', 'emailGravatar', 'input-gravatar-email')}
+        {renderLabelInput('insira o nome', 'text', 'name', 'name', 'input-player-name')}
         <input
-          value="jogar"
-          id="jogar"
-          type="button"
-          dataTestid="btn-play"
+          value='jogar'
+          id='jogar'
+          type='button'
+          dataTestid='btn-play'
           onClick={() => dispatch(logInto(user))}
         />
       </form>

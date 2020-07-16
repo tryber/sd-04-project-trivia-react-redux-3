@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class LogoUser extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { urlGravatar } = this.props;
     console.log(urlGravatar);
