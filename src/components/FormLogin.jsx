@@ -28,7 +28,7 @@ const FormLogin = () => {
   };
 
   return (
-    <>
+    <div>
       <form>
         {renderLabelInput('insira o email', 'email', 'email', 'emailGravatar', 'input-gravatar-email')}
         {renderLabelInput('insira o nome', 'text', 'name', 'name', 'input-player-name')}
@@ -40,7 +40,7 @@ const FormLogin = () => {
           onClick={() => dispatch(logInto(user))}
         />
       </form>
-    </>
+    </div>
   );
 };
 
