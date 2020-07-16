@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logInto } from '../actions/login';
+import { Link } from 'react-router-dom';
 
 const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) => (
   <label htmlFor={id}>
@@ -16,6 +17,16 @@ const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) 
       }
     />
   </label>
+);
+
+const renderButtonSettings = () => (
+  <Link to="Configuration" data-testid="btn-settings">
+    <input
+      value="configurações"
+      id="config"
+      type="button"
+    />
+  </Link>
 );
 
 const FormLogin = () => {
@@ -40,6 +51,7 @@ const FormLogin = () => {
           disabled={validateIputs()}
           onClick={() => dispatch(logInto(user))}
         />
+        {renderButtonSettings()}
       </form>
     </div>
   );
