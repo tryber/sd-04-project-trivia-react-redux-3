@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     assertions: 0,
     score: 0,
     gravatarEmail: '',
-},
+  },
 };
 
 const login = (state = INITIAL_STATE, action) => {
@@ -24,7 +24,7 @@ const login = (state = INITIAL_STATE, action) => {
           assertions: 0,
           score: 0,
           gravatarEmail: action.emailGravatar,
-      },
+        },
       };
     default:
       return state;
