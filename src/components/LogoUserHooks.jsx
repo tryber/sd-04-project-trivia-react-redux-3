@@ -6,7 +6,7 @@ const LogoUser = () => {
 
   return (
     <div>
-      <img src={urlGravatar} alt='logo' />
+      <img src={urlGravatar} alt="logo" />
     </div>
   );
 };

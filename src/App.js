@@ -7,7 +7,7 @@ import './App.css';
 export default function App() {
   return (
     <Router>
-      <div className='App'>
+      <div className="App">
         <Switch>
           <Route path="/" component={Login} />
           <Route path="/Configuration" component={Configuration} />

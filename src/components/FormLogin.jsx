@@ -9,23 +9,22 @@ const FormLogin = () => {
   });
   const dispatch = useDispatch();
 
-  const renderLabelInput = (textLabel, type, id, name, dataTestid) => {
-    return (
-      <label htmlFor={id}>
-        {textLabel}
-        <input
-          id={id}
-          name={name}
-          type={type}
-          value={user[name]}
-          data-testid={dataTestid}
-          onChange={(event) =>
-            setUser({ ...user, [event.target.name]: event.target.value })
-          }
-        />
-      </label>
-    );
-  };
+  const renderLabelInput = (textLabel, type, id, name, dataTestid) => (
+    <label htmlFor={id}>
+      {textLabel}
+      <input
+        id={id}
+        name={name}
+        type={type}
+        value={user[name]}
+        data-testid={dataTestid}
+        onChange={(event) =>
+          setUser({ ...user, [event.target.name]: event.target.value })
+        }
+      />
+    </label>
+  );
+  
 
   return (
     <div>
