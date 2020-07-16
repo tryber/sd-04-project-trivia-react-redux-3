@@ -36,7 +36,7 @@ const FormLogin = () => {
           value="jogar"
           id="jogar"
           type="button"
-          dataTestid="btn-play"
+          data-testid="btn-play"
           disabled={validateIputs()}
           onClick={() => dispatch(logInto(user))}
         />
