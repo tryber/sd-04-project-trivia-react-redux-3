@@ -25,6 +25,8 @@ const FormLogin = () => {
   });
   const dispatch = useDispatch();
 
+  const validateIputs = () => (Object.values(user).some(((value) => !value)));
+
   return (
     <div>
       <form>
@@ -35,6 +37,7 @@ const FormLogin = () => {
           id="jogar"
           type="button"
           dataTestid="btn-play"
+          disabled={validateIputs()}
           onClick={() => dispatch(logInto(user))}
         />
       </form>
