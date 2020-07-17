@@ -4,8 +4,8 @@ const INITIAL_STATE = {
   isLogged: false,
   name: '',
   emailGravatar: '',
-  assertions:0,
-  score:0,
+  assertions: 0,
+  score: 0,
   urlGravatar: 'https://www.gravatar.com/avatar/',
 };
 
