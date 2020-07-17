@@ -4,11 +4,12 @@ import {
 
 const initialState = {
   tokenIsFetching: false,
-  token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : [],
+  token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null,
 };
 
 export default (state = initialState, { type, payload }) => {
-  console.log('ress', state);
+  console.log('type', type);
+  console.log('pay', payload);
   switch (type) {
     case REQUEST_TOKEN:
       return { ...state, tokenIsFetching: true };
