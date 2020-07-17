@@ -19,7 +19,7 @@ class QuestionsDisplay extends React.Component {
               'True',
               'test1',
               'test2',
-            ]
+            ],
           },
         ],
       },
@@ -30,8 +30,9 @@ class QuestionsDisplay extends React.Component {
   }
 
   shuffleAnswerList(listInput) {
-    const list = listInput; 
-    for (let i = list.length - 1; i > 0; i-=1) {
+    this.bar = 0; // because CC Expected 'this' to be used by class method 'shuffleAnswerList'
+    const list = listInput;
+    for (let i = list.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [list[i], list[j]] = [list[j], list[i]];
     }
@@ -39,7 +40,6 @@ class QuestionsDisplay extends React.Component {
   }
 
   answerListMaker() {
-    this.bar = 0; //because CC Expected 'this' to be used by class method 'shuffleAnswerList'
     const questionToDisplay = this.state.questions.results[0];
     const answerList = [{ testId: 'correct-answer', answer: questionToDisplay.correct_answer }];
     questionToDisplay.incorrect_answers.map((answer, index) => (
@@ -54,8 +54,8 @@ class QuestionsDisplay extends React.Component {
     return (
       // <Header />
       <div>
-        <p data-testid='question-category'>Category: {questionToDisplay.category}</p>
-        <p data-testid='question-text'>Question: {questionToDisplay.question}</p>
+        <p data-testid="question-category">Category: {questionToDisplay.category}</p>
+        <p data-testid="question-text">Question: {questionToDisplay.question}</p>
         <div>
           <p>Please chose an answer:</p>
           {answersToDisplay.map((answer) => (
