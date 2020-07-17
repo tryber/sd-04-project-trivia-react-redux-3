@@ -7,7 +7,7 @@ const requestToken = () => ({
 
 const requestTokenSuccess = ({ token }) => ({
   type: RECEIVE_TOKEN_SUCCESS,
-  token,
+  payload: token,
 });
 
 const receiveTokenFailure = (error) => ({
@@ -16,7 +16,8 @@ const receiveTokenFailure = (error) => ({
 });
 
 export default function fetchToken() {
-  return (dispatch) => {
+  return (dispatch, state) => {
+    console.log('fsdfsdf', state());
     dispatch(requestToken());
     return getToken()
       .then(

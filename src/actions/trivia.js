@@ -1,24 +1,29 @@
-import { REQUEST_TRIVIA, RECEIVE_TRIVIA_SUCCESS, RECEIVE_TRIVIA_FAILURE, RESET_TRIVIA } from '../types/typeTrivia';
+import { getTrivia } from '../services/triviaAPI';
+import { REQUEST_TRIVIA, RECEIVE_TRIVIA_SUCCESS, RECEIVE_TRIVIA_FAILURE } from '../types/typeTrivia';
 
-const initialState = {
-  IsFetching: false,
-  results: [],
-};
+const requestTrivia = () => ({
+  type: REQUEST_TRIVIA,
+});
 
-export default (state = initialState, { type, payload }) => {
-  switch (type) {
-    case REQUEST_TRIVIA:
-      return { ...state, IsFetching: true };
-    case RECEIVE_TRIVIA_SUCCESS:
-      return {
-        gameIsFetching: false,
-        results: [payload.results],
-      };
-    case RECEIVE_TRIVIA_FAILURE:
-      return { ...state, IsFetching: false, error: payload };
-    case RESET_TRIVIA:
-      return initialState;
-    default:
-      return state;
-  }
-};
+const requestTriviaSuccess = (data) => ({
+  type: RECEIVE_TRIVIA_SUCCESS,
+  payload: data,
+});
+
+const receiveTriviaFailure = (error) => ({
+  type: RECEIVE_TRIVIA_FAILURE,
+  payload: error,
+});
+
+export default function fetchTrivia(token, category, difficulty, type) {
+  return (dispatch, state) => {
+    const { token: { token: tokenT } } = state();
+    console.log('token', tokenT);
+    dispatch(requestTrivia());
+    return getTrivia(tokenT, category, difficulty, type)
+      .then(
+        (data) => dispatch(requestTriviaSuccess(data)),
+        (error) => dispatch(receiveTriviaFailure(error.message)),
+      );
+  };
+}

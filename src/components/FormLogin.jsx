@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logInto } from '../actions/login';
 import fetchToken from '../actions/token';
+import fetchTrivia from '../actions/trivia';
 
 const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) => (
   <label htmlFor={id}>
@@ -21,8 +22,12 @@ const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) 
 );
 
 const fetchQuestions = async (dispatch) => {
-  await dispatch(fetchToken()).then(({ token }) =>
-    localStorage.setItem('token', JSON.stringify([token])));
+  const { payload: { response_code: responseCode } } = await dispatch(fetchTrivia());
+  if (responseCode === 3) {
+    await dispatch(fetchToken()).then(({ payload }) =>
+      localStorage.setItem('token', JSON.stringify(payload)));
+  }
+  dispatch(fetchTrivia());
 };
 
 const renderButtonSettings = () => (

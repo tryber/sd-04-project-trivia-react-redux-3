@@ -7,3 +7,4 @@ export const logInto = (login) => ({
   ...login,
   urlGravatar: cryptEmail(login.emailGravatar),
 });
+
