@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export default (state = initialState, { type, payload }) => {
-  console.log('ress',state);
+  console.log('ress', state);
   switch (type) {
     case REQUEST_TOKEN:
       return { ...state, tokenIsFetching: true };

@@ -22,7 +22,7 @@ const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) 
 
 const fetchQuestions = async (dispatch) => {
   await dispatch(fetchToken()).then(({ token }) =>
-    localStorage.setItem("token",JSON.stringify([token])));
+    localStorage.setItem('token', JSON.stringify([token])));
 };
 
 const renderButtonSettings = () => (
@@ -57,7 +57,7 @@ const FormLogin = () => {
           disabled={validateIputs()}
           onClick={() => {
             dispatch(logInto(user));
-            fetchQuestions(dispatch)
+            fetchQuestions(dispatch);
           }}
         />
         {renderButtonSettings()}

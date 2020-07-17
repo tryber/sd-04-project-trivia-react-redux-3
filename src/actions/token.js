@@ -5,7 +5,7 @@ const requestToken = () => ({
   type: REQUEST_TOKEN,
 });
 
-const requestTokenSuccess = ({token}) => ({
+const requestTokenSuccess = ({ token }) => ({
   type: RECEIVE_TOKEN_SUCCESS,
   token,
 });
