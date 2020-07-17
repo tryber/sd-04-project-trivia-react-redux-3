@@ -1,7 +1,7 @@
-import { REQUEST_TRIVIA, RECEIVE_TRIVIA_SUCCESS, RECEIVE_TRIVIA_FAILURE, RESET_TRIVIA } from '../';
+import { REQUEST_TRIVIA, RECEIVE_TRIVIA_SUCCESS, RECEIVE_TRIVIA_FAILURE, RESET_TRIVIA } from '../types/typeTrivia';
 
 const initialState = {
-  gameIsFetching: true,
+  isFetching: false,
   trivia: {
     response_code: -1,
     results: [],
@@ -11,14 +11,14 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case REQUEST_TRIVIA:
-      return { ...state, gameIsFetching: true };
+      return { ...state, isFetching: true };
     case RECEIVE_TRIVIA_SUCCESS:
       return {
-        gameIsFetching: false,
+        isFetching: false,
         trivia: { responseCode: payload.responseCode, results: [...payload.results] },
       };
     case RECEIVE_TRIVIA_FAILURE:
-      return { ...state, gameIsFetching: false, error: payload };
+      return { ...state, isFetching: false, error: payload };
     case RESET_TRIVIA:
       return initialState;
     default:

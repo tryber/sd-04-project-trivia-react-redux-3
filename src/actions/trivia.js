@@ -17,7 +17,7 @@ const receiveTriviaFailure = (error) => ({
 
 export default function fetchTrivia(token, category, difficulty, type) {
   return (dispatch, state) => {
-    const {token:{token}} = state();
+    const { token: { token } } = state();
     console.log('token', token);
     dispatch(requestTrivia());
     return getTrivia(token, category, difficulty, type)

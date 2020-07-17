@@ -16,7 +16,7 @@ const receiveTokenFailure = (error) => ({
 });
 
 export default function fetchToken() {
-  return (dispatch,state) => {
+  return (dispatch, state) => {
     console.log('fsdfsdf', state());
     dispatch(requestToken());
     return getToken()
