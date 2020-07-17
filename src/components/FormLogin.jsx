@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logInto } from '../actions/login';
+import fetchToken from '../actions/token';
 
 const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) => (
   <label htmlFor={id}>
@@ -18,6 +19,11 @@ const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) 
     />
   </label>
 );
+
+const fetchQuestions = async (dispatch) => {
+  await dispatch(fetchToken()).then(({ token }) =>
+    localStorage.setItem('token', JSON.stringify([token])));
+};
 
 const renderButtonSettings = () => (
   <Link to="Configuration" data-testid="btn-settings">
@@ -49,7 +55,10 @@ const FormLogin = () => {
           type="button"
           data-testid="btn-play"
           disabled={validateIputs()}
-          onClick={() => dispatch(logInto(user))}
+          onClick={() => {
+            dispatch(logInto(user));
+            fetchQuestions(dispatch);
+          }}
         />
         {renderButtonSettings()}
       </form>
