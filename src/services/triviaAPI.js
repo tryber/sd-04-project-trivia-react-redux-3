@@ -4,10 +4,10 @@ export const getToken = () => fetch(
   .then((json) => (token.ok ? Promise.resolve(json) : Promise.reject(json))));
 
 export async function getTrivia(token, category, difficulty, type) {
-  const url = (token && category && difficulty && type) ? 
+  const url = (token && category && difficulty && type) ?
   `https://opentdb.com/api.php?amount=5&token=${token}&category=${category}&difficulty=${difficulty}&type=${type}` :
   `https://opentdb.com/api.php?amount=5&token=${token}`;
-  console.log('service token',token);
+  console.log('service token', token);
   return fetch(url)
     .then((trivia) => trivia
       .json()
