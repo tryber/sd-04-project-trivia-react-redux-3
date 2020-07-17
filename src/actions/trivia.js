@@ -17,10 +17,10 @@ const receiveTriviaFailure = (error) => ({
 
 export default function fetchTrivia(token, category, difficulty, type) {
   return (dispatch, state) => {
-    const { token: { token } } = state();
-    console.log('token', token);
+    const { token: { token: tokenT } } = state();
+    console.log('token', tokenT);
     dispatch(requestTrivia());
-    return getTrivia(token, category, difficulty, type)
+    return getTrivia(tokenT, category, difficulty, type)
       .then(
         (data) => dispatch(requestTriviaSuccess(data)),
         (error) => dispatch(receiveTriviaFailure(error.message)),

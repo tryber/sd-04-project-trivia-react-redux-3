@@ -22,11 +22,11 @@ const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) 
 );
 
 const fetchQuestions = async (dispatch) => {
-  const { payload: { response_code } } = await dispatch(fetchTrivia());
-  if (response_code === 3) {
+  const { payload: { response_code: responseCode } } = await dispatch(fetchTrivia());
+  if (responseCode === 3) {
     await dispatch(fetchToken()).then(({ payload }) =>
       localStorage.setItem('token', JSON.stringify(payload)));
-  }    
+  }
   dispatch(fetchTrivia());
 };
 
