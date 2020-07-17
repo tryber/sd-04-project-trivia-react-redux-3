@@ -23,7 +23,7 @@ const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) 
 
 const fetchQuestions = async (dispatch) => {
   const { payload:{ response_code } } = await dispatch(fetchTrivia());
-  response_code == 3 ? await dispatch(fetchToken()).then(({ payload }) =>
+  if(response_code == 3)  await dispatch(fetchToken()).then(({ payload }) =>
     localStorage.setItem('token', JSON.stringify(payload)));
   dispatch(fetchTrivia());
 };
