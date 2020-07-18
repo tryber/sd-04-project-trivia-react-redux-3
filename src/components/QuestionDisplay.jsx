@@ -1,32 +1,21 @@
 import React from 'react';
-// import Header from '../components/Header';
+import { connect } from 'react-redux';
+import { buttonAnswer } from '../actions/buttonAnswer';
+import Header from '../components/Header';
 
 class QuestionsDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions:
-      {
-        response_code: 0,
-        results: [
-          {
-            category: 'Entertainment: Video Games',
-            type: 'boolean',
-            difficulty: 'hard',
-            question: 'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
-            correct_answer: 'False',
-            incorrect_answers: [
-              'True',
-              'test1',
-              'test2',
-            ],
-          },
-        ],
-      },
-
+      answersToDisplay: [],
     };
+
     this.answerListMaker = this.answerListMaker.bind(this);
     this.shuffleAnswerList = this.shuffleAnswerList.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ answersToDisplay: this.answerListMaker() });
   }
 
   shuffleAnswerList(listInput) {
@@ -40,33 +29,47 @@ class QuestionsDisplay extends React.Component {
   }
 
   answerListMaker() {
-    const questionToDisplay = this.state.questions.results[0];
-    const answerList = [{ testId: 'correct-answer', answer: questionToDisplay.correct_answer }];
+    const questionToDisplay = this.props.question.results[0];
+    const answerList = [{ testId: 'correct-answer', answer: questionToDisplay.correct_answer, borderStyle: '3px solid rgb(6, 240, 15)' }];
     questionToDisplay.incorrect_answers.map((answer, index) => (
-      answerList.push({ testId: `wrong-answer-${index}`, answer })
+      answerList.push({ testId: `wrong-answer-${index}`, answer, borderStyle: '3px solid rgb(255, 0, 0)' })
     ));
     return this.shuffleAnswerList(answerList);
   }
 
   render() {
-    const answersToDisplay = this.answerListMaker();
-    const questionToDisplay = this.state.questions.results[0];
+    const { answersToDisplay } = this.state;
+    const questionToDisplay = this.props.question.results[0];
     return (
-      // <Header />
       <div>
-        <p data-testid="question-category">Category: {questionToDisplay.category}</p>
-        <p data-testid="question-text">Question: {questionToDisplay.question}</p>
+        <Header />
         <div>
-          <p>Please chose an answer:</p>
-          {answersToDisplay.map((answer) => (
-            <button key={answer.answer} data-testid={answer.testId}>{answer.answer} </button>
-          ),
-          )}
+          <p data-testid="question-category">Category: {questionToDisplay.category}</p>
+          <p data-testid="question-text">Question: {questionToDisplay.question}</p>
+          <div>
+            <p>Please choose an answer:</p>
+            {answersToDisplay.map((answer) => (
+              <button key={answer.answer} data-testid={answer.testId}
+                onClick={() => {
+                  this.props.buttonAnswer();
+                }}
+                style={this.props.borderColorChange ? { border: answer.borderStyle } : { border: '5px solid gray' }}
+              >{answer.answer} </button>
+            ),
+            )}
+          </div>
         </div>
       </div>
-
     );
   }
 }
 
-export default QuestionsDisplay;
+const mapStateToProps = (state) => ({
+  borderColorChange: state.ButtonAnswer.borderColorChange,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  buttonAnswer: () => dispatch(buttonAnswer()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionsDisplay)
