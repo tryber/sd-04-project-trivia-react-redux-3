@@ -76,14 +76,16 @@ const mapDispatchToProps = (dispatch) => ({
   buttonAnswer: () => dispatch(buttonAnswer()),
 });
 
-SearchBar.propTypes = {
+QuestionsDisplay.propTypes = {
   question: PropTypes.shape(),
   buttonAnswer: PropTypes.func.isRequired,
   borderColorChange: PropTypes.bool.isRequired,
+  questionToDisplay: PropTypes.shape(),
 };
 
-SearchBar.defaultProps = {
+QuestionsDisplay.defaultProps = {
   question: null,
+  questionToDisplay: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsDisplay);
