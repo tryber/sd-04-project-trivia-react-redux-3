@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { buttonAnswer } from '../actions/buttonAnswer';
 import Header from '../components/Header';
@@ -50,7 +51,7 @@ class QuestionsDisplay extends React.Component {
           <div>
             <p>Please choose an answer:</p>
             {answersToDisplay.map((answer) => (
-              <button 
+              <button
                 key={answer.answer}
                 data-testid={answer.testId}
                 onClick={() => {
@@ -74,5 +75,15 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   buttonAnswer: () => dispatch(buttonAnswer()),
 });
+
+SearchBar.propTypes = {
+  question: PropTypes.shape(),
+  buttonAnswer: PropTypes.func.isRequired,
+  borderColorChange: PropTypes.bool.isRequired,
+};
+
+SearchBar.defaultProps = {
+  question: null,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsDisplay);
