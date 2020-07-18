@@ -80,12 +80,12 @@ QuestionsDisplay.propTypes = {
   question: PropTypes.shape(),
   buttonAnswer: PropTypes.func.isRequired,
   borderColorChange: PropTypes.bool.isRequired,
-  questionToDisplay: PropTypes.shape(),
+  // questionToDisplay: PropTypes.shape(),
 };
 
 QuestionsDisplay.defaultProps = {
   question: null,
-  questionToDisplay: null,
+  // questionToDisplay: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsDisplay);
