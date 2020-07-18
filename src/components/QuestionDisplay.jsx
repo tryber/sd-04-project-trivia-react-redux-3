@@ -25,7 +25,6 @@ class QuestionsDisplay extends React.Component {
       const j = Math.floor(Math.random() * (i + 1));
       [list[i], list[j]] = [list[j], list[i]];
       this.setState({ answersToDisplay: list });
-
     }
     return list;
   }
@@ -51,7 +50,8 @@ class QuestionsDisplay extends React.Component {
           <div>
             <p>Please choose an answer:</p>
             {answersToDisplay.map((answer) => (
-              <button key={answer.answer}
+              <button 
+                key={answer.answer}
                 data-testid={answer.testId}
                 onClick={() => {
                   this.props.buttonAnswer();
