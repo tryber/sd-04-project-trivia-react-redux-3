@@ -7,7 +7,7 @@ const Login = () => (
   <div>
     <LogoUserHooks />
     <FormLogin />
-    <Game></Game>
+    <Game />
   </div>
 );
 

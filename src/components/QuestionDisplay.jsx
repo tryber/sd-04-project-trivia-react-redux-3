@@ -16,6 +16,7 @@ class QuestionsDisplay extends React.Component {
 
   componentDidMount() {
     this.setState({ answersToDisplay: this.answerListMaker() });
+    // const answersToDisplay = this.answerListMaker();
   }
 
   shuffleAnswerList(listInput) {
@@ -49,7 +50,8 @@ class QuestionsDisplay extends React.Component {
           <div>
             <p>Please choose an answer:</p>
             {answersToDisplay.map((answer) => (
-              <button key={answer.answer} data-testid={answer.testId}
+              <button key={answer.answer} 
+              data-testid={answer.testId}
                 onClick={() => {
                   this.props.buttonAnswer();
                 }}
@@ -70,6 +72,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   buttonAnswer: () => dispatch(buttonAnswer()),
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionsDisplay)
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionsDisplay);

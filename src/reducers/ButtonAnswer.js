@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export default (state = initialState, { type }) => {
-
   switch (type) {
     case CHANGE_BORDER_COLOR:
       return { ...state, borderColorChange: true };
