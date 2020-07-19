@@ -45,21 +45,21 @@ class QuestionsDisplay extends React.Component {
   scoreCalculator(testId) {
     const { difficulty } = this.props.question;
     let difficultyPoints = 0;
-    if (testId.includes("correct")) {
+    if (testId.includes('correct')) {
       switch (difficulty) {
-        case "hard":
+        case 'hard':
           difficultyPoints = 3;
           break;
-        case "medium":
+        case 'medium':
           difficultyPoints = 2;
           break;
-        case "easy":
+        case 'easy':
           difficultyPoints = 1;
           break;
         default:
           break;
       }
-      this.props.updateScore(10 + (this.state.timer * difficultyPoints))
+      this.props.updateScore(10 + (this.state.timer * difficultyPoints));
     }
     localStorage.setItem('state', JSON.stringify({ player: this.props.login.player }));
     this.props.enableNextButton();
@@ -114,14 +114,19 @@ const mapDispatchToProps = (dispatch) => ({
 
 QuestionsDisplay.propTypes = {
   question: PropTypes.shape(),
+  login: PropTypes.shape(),
   buttonAnswer: PropTypes.func.isRequired,
+  updateScore: PropTypes.func.isRequired,
+  enableNextButton: PropTypes.func.isRequired,
   disableButton: PropTypes.func.isRequired,
+  nextButtonEnable: PropTypes.func.isRequired,
+  answerButtonEnable: PropTypes.func.isRequired,
   borderColorChange: PropTypes.bool.isRequired,
 };
 
 QuestionsDisplay.defaultProps = {
   question: null,
-  // questionToDisplay: null,
+  login: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsDisplay);

@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 };
 
 const login = (state = INITIAL_STATE, action) => {
-  console.log('meu state movieReducer : ', state,action);
+  console.log('meu state movieReducer : ', state, action);
   switch (action.type) {
     case LOG_INTO:
       return {
@@ -29,7 +29,7 @@ const login = (state = INITIAL_STATE, action) => {
     case UPDATE_SCORE:
       return {
         ...state,
-        player: {...state.player,
+        player: { ...state.player,
           score: state.player.score + action.score,
         },
       };
