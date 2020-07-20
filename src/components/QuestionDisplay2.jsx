@@ -17,30 +17,35 @@ export default function QuestionDisplay2({ setGame, handleAnswer, game, question
     setQuestionLocal(questionRandom);
   }, [idQuestion]);
 
-  return (
-    <div>
-      <p data-testid="question-category">Category: {questions[idQuestion].category}</p>
-      <p data-testid="question-text">Question: {questions[idQuestion].question}</p>
+  if (questionLocal.length > 0) {
+    return (
       <div>
-        <p>Please chose an answer:</p>
-        {questionLocal.map((answer) => (
-          <button
-            key={answer.answer}
-            className={`${!!selectedAnswer || (timer === 0) ? answer.class : ''}`}
-            data-testid={answer.testId}
-            disabled={!!selectedAnswer}
-            onClick={() => {
-              console.log('answer.answer', answer.answer);
-              setGame((state) => ({ ...state, selectedAnswer: answer.answer }));
-              handleAnswer();
-            }}
-          >
-            {answer.answer}
-          </button>
-        ),
-        )}
+        <p data-testid="question-category">Category: {questions[idQuestion].category}</p>
+        <p data-testid="question-text">Question: {questions[idQuestion].question}</p>
+        <div>
+          <p>Please chose an answer:</p>
+          {questionLocal.map((answer) => (
+            <button
+              key={answer.answer}
+              className={`${!!selectedAnswer || (timer === 0) ? answer.class : ''}`}
+              data-testid={answer.testId}
+              disabled={!!selectedAnswer}
+              onClick={() => {
+                console.log('answer.answer', answer.answer);
+                setGame((state) => ({ ...state, selectedAnswer: answer.answer }));
+                handleAnswer();
+              }}
+            >
+              {answer.answer}
+            </button>
+          ),
+          )}
+        </div>
       </div>
-    </div>
+    );
+  }
+  return (
+    <div>...loading</div>
   );
 }
 
