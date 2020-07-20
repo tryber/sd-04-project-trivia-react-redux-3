@@ -26,7 +26,7 @@ const login = (state = INITIAL_STATE, action) => {
           gravatarEmail: action.emailGravatar,
         },
       };
-    case UPDATE_PLAYER:  
+    case UPDATE_PLAYER:
       return {
         ...state,
         player: {

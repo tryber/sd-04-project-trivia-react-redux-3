@@ -18,7 +18,7 @@ function Game({ history }) {
   const { player } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const difficulty = { hard: 3, medium: 2, easy: 1 };
-  
+
   const stateProps = {
     setTimer,
     setIdInterval,
@@ -40,10 +40,10 @@ function Game({ history }) {
   const getScore = () => (10 + (timer * difficulty[questions[idQuestion].difficulty]));
 
   const validateAnswer = () => {
-      if((selectedAnswer) && selectedAnswer === questions[idQuestion].correct_answer)
-      {
-        dispatch(updatePlayer(getScore()));
-      }
+    if ((selectedAnswer) && selectedAnswer === questions[idQuestion].correct_answer)
+    {
+      dispatch(updatePlayer(getScore()));
+    }
   };
 
   const covertRanking = ({ name, score, gravatarEmail }) => ({ name, score, gravatarEmail });
@@ -51,18 +51,18 @@ function Game({ history }) {
   const handleNext = () => {
     setSelectedAnswer('');
     setTimer(30);
-   if(idQuestion == 4) {
-    clearInterval(idInterval);
-    localStorage.getItem('ranking') ?
-      localStorage.setItem('ranking', JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), covertRanking(player)])) :
-      localStorage.setItem('ranking', JSON.stringify([covertRanking(player)])); 
-    history.push('/Feedback');
+   if (idQuestion === 4) {
+     clearInterval(idInterval);
+     localStorage.getItem('ranking') ?
+       localStorage.setItem('ranking', JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), covertRanking(player)])) :
+       localStorage.setItem('ranking', JSON.stringify([covertRanking(player)])); 
+     history.push('/Feedback');
    }
-    setIdQuestion(state => state + 1);
+    setIdQuestion((state) => state + 1);
   };
 
   useEffect(() => {
-    if(timer == 0) {
+    if(timer === 0) {
       handleAnswer();
     }
   }, [timer]);
@@ -78,15 +78,15 @@ function Game({ history }) {
   return (questions.length > 0) ? (
     <div>
       <Header />
-      <Timer  stateProps={stateProps} />
+      <Timer stateProps={stateProps} />
       <QuestionDisplay2 stateProps={stateProps} handleAnswer={handleAnswer} />
       {(selectedAnswer || (timer === 0)) && <button onClick={() => handleNext()}>next</button>}
-    </div> 
+    </div>
   ) : (
     <div>
       loading...
     </div>
-  ); 
+  );
 }
 
 export default withRouter(Game);

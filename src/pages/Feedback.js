@@ -5,5 +5,5 @@ export default function Feedback() {
     <div>
       hfhfhf
     </div>
-  )
+  );
 }
