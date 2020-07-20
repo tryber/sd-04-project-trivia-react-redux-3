@@ -1,4 +1,4 @@
-import { LOG_INTO } from '../actions/login';
+import { LOG_INTO, UPDATE_PLAYER } from '../actions/login';
 
 const INITIAL_STATE = {
   isLogged: false,
@@ -24,6 +24,15 @@ const login = (state = INITIAL_STATE, action) => {
           assertions: 0,
           score: 0,
           gravatarEmail: action.emailGravatar,
+        },
+      };
+    case UPDATE_PLAYER:  
+      return {
+        ...state,
+        player: {
+          ...state.player,
+          assertions: state.player.assertions + 1,
+          score: action.score,
         },
       };
     default:
