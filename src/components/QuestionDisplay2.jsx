@@ -17,7 +17,7 @@ export default function QuestionDisplay2({ setGame, handleAnswer, game, question
     setQuestionLocal(questionRandom);
   }, [idQuestion]);
 
-  if(questionLocal.length > 0) {
+  if (questionLocal.length > 0) {
     return (
       <div>
         <p data-testid="question-category">Category: {questions[idQuestion].category}</p>
@@ -43,10 +43,10 @@ export default function QuestionDisplay2({ setGame, handleAnswer, game, question
         </div>
       </div>
     );
-  } else
-    return (
-      <div>...loading</div>
-    );   
+  };
+  return (
+    <div>...loading</div>
+  );
 }
 
 QuestionDisplay2.propTypes = {
