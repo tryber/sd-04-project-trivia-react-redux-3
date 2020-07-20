@@ -117,4 +117,5 @@ QuestionsDisplay.defaultProps = {
   question: null,
   login: null,
 };
+// dwliw
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsDisplay);
