@@ -1,32 +1,22 @@
 import React from 'react';
-// import Header from '../components/Header';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { buttonAnswer } from '../actions/buttonAnswer';
+import Header from '../components/Header';
 
 class QuestionsDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions:
-      {
-        response_code: 0,
-        results: [
-          {
-            category: 'Entertainment: Video Games',
-            type: 'boolean',
-            difficulty: 'hard',
-            question: 'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
-            correct_answer: 'False',
-            incorrect_answers: [
-              'True',
-              'test1',
-              'test2',
-            ],
-          },
-        ],
-      },
-
+      answersToDisplay: [],
     };
+
     this.answerListMaker = this.answerListMaker.bind(this);
     this.shuffleAnswerList = this.shuffleAnswerList.bind(this);
+  }
+
+  componentDidMount() {
+    this.answerListMaker();
   }
 
   shuffleAnswerList(listInput) {
@@ -35,38 +25,67 @@ class QuestionsDisplay extends React.Component {
     for (let i = list.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [list[i], list[j]] = [list[j], list[i]];
+      this.setState({ answersToDisplay: list });
     }
     return list;
   }
 
   answerListMaker() {
-    const questionToDisplay = this.state.questions.results[0];
-    const answerList = [{ testId: 'correct-answer', answer: questionToDisplay.correct_answer }];
+    const questionToDisplay = this.props.question.results[0];
+    const answerList = [{ testId: 'correct-answer', answer: questionToDisplay.correct_answer, borderStyle: '3px solid rgb(6, 240, 15)' }];
     questionToDisplay.incorrect_answers.map((answer, index) => (
-      answerList.push({ testId: `wrong-answer-${index}`, answer })
+      answerList.push({ testId: `wrong-answer-${index}`, answer, borderStyle: '3px solid rgb(255, 0, 0)' })
     ));
     return this.shuffleAnswerList(answerList);
   }
 
   render() {
-    const answersToDisplay = this.answerListMaker();
-    const questionToDisplay = this.state.questions.results[0];
+    const { answersToDisplay } = this.state;
+    const questionToDisplay = this.props.question.results[0];
     return (
-      // <Header />
       <div>
-        <p data-testid="question-category">Category: {questionToDisplay.category}</p>
-        <p data-testid="question-text">Question: {questionToDisplay.question}</p>
+        <Header />
         <div>
-          <p>Please chose an answer:</p>
-          {answersToDisplay.map((answer) => (
-            <button key={answer.answer} data-testid={answer.testId}>{answer.answer} </button>
-          ),
-          )}
+          <p data-testid="question-category">Category: {questionToDisplay.category}</p>
+          <p data-testid="question-text">Question: {questionToDisplay.question}</p>
+          <div>
+            <p>Please choose an answer:</p>
+            {answersToDisplay.map((answer) => (
+              <button
+                key={answer.answer}
+                data-testid={answer.testId}
+                onClick={() => {
+                  this.props.buttonAnswer();
+                }}
+                style={this.props.borderColorChange ? { border: answer.borderStyle } : { border: '5px solid gray' }}
+              >{answer.answer} </button>
+            ),
+            )}
+          </div>
         </div>
       </div>
-
     );
   }
 }
 
-export default QuestionsDisplay;
+const mapStateToProps = (state) => ({
+  borderColorChange: state.ButtonAnswer.borderColorChange,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  buttonAnswer: () => dispatch(buttonAnswer()),
+});
+
+QuestionsDisplay.propTypes = {
+  question: PropTypes.shape(),
+  buttonAnswer: PropTypes.func.isRequired,
+  borderColorChange: PropTypes.bool.isRequired,
+  // questionToDisplay: PropTypes.shape(),
+};
+
+QuestionsDisplay.defaultProps = {
+  question: null,
+  // questionToDisplay: null,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionsDisplay);
