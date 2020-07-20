@@ -29,7 +29,7 @@ class QuestionsDisplay extends React.Component {
   }
 
   shuffleAnswerList(listInput) {
-    this.bar = 0; // ecause CC Expected 'this' to be used by class method 'shuffleAnswerList'
+    this.bar = 0; // recause CC Expected 'this' to be used by class method 'shuffleAnswerList'
     const list = listInput;
     for (let i = list.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
