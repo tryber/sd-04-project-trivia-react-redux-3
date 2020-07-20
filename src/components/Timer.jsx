@@ -18,3 +18,8 @@ export default function Timer({ setGame, game }) {
     </div>
   );
 }
+
+Timer.propTypes = {
+  setGame: PropTypes.func.isRequired,
+  game: PropTypes.objectOf(PropTypes.any).isRequired,
+};

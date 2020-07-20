@@ -10,9 +10,8 @@ const difficulty = { hard: 3, medium: 2, easy: 1 };
 
 const getScore = (timer, questions) => (10 + (timer * difficulty[questions.difficulty]));
 
-const validateAnswer = ({timer, selectedAnswer}, questions, dispatch) => {
-  if ((selectedAnswer) && selectedAnswer === questions.correct_answer)
-  {
+const validateAnswer = ({ timer, selectedAnswer }, questions, dispatch) => {
+  if ((selectedAnswer) && selectedAnswer === questions.correct_answer) {
     dispatch(updatePlayer(getScore(timer, questions)));
   }
 };
@@ -22,13 +21,13 @@ const covertRanking = ({ name, score, gravatarEmail }) => ({ name, score, gravat
 const handleNext = (setGame, { idQuestion, idInterval }, player, history) => {
   setGame((state) => ({ ...state, selectedAnswer: '' }));
   setGame((state) => ({ ...state, timer: 30 }));
- if (idQuestion === 4) {
-   clearInterval(idInterval);
-   localStorage.getItem('ranking') ?
-     localStorage.setItem('ranking', JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), covertRanking(player)])) :
-     localStorage.setItem('ranking', JSON.stringify([covertRanking(player)])); 
-   history.push('/Feedback');
- }
+  if (idQuestion === 4) {
+    clearInterval(idInterval);
+    localStorage.getItem('ranking') ?
+      localStorage.setItem('ranking', JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), covertRanking(player)])) :
+      localStorage.setItem('ranking', JSON.stringify([covertRanking(player)])); 
+    history.push('/Feedback');
+  }
   setGame((state) => ({ ...state, idQuestion: state.idQuestion + 1 }));
 };
 
@@ -44,7 +43,7 @@ function Game({ history }) {
   const { player } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const { timer, idInterval, idQuestion, selectedAnswer } = game;
-  
+
   const handleAnswer = () => {
     clearInterval(idInterval);
     setGame((state) => ({ ...state, idInterval: null }));
@@ -67,9 +66,10 @@ function Game({ history }) {
   return (questions.length > 0) ? (
     <div>
       <Header />
-      <Timer setGame={setGame} game={game}/>
-      <QuestionDisplay2 setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions}/>
-      {(selectedAnswer || (timer === 0)) && <button onClick={() => handleNext(setGame, game, player, history)}>next</button>}
+      <Timer setGame={setGame} game={game} />
+      <QuestionDisplay2 setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions} />
+      {(selectedAnswer || (timer === 0)) && <button onClick={() =>
+        handleNext(setGame, game, player, history)}>next</button>}
     </div>
   ) : (
     <div>
@@ -77,5 +77,9 @@ function Game({ history }) {
     </div>
   );
 }
+
+Game.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default withRouter(Game);

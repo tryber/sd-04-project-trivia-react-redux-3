@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function QuestionDisplay2({ setGame , handleAnswer, game, questions }) {
+export default function QuestionDisplay2({ setGame, handleAnswer, game, questions }) {
   const { timer, idQuestion, selectedAnswer, currentQuestion } = game;
   const [questionLocal, setQuestionLocal] = useState(currentQuestion);
 
@@ -41,3 +41,10 @@ export default function QuestionDisplay2({ setGame , handleAnswer, game, questio
     </div>
   );
 }
+
+QuestionDisplay2.propTypes = {
+  setGame: PropTypes.func.isRequired,
+  handleAnswer: PropTypes.func.isRequired,
+  game: PropTypes.objectOf(PropTypes.any).isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired, 
+};
