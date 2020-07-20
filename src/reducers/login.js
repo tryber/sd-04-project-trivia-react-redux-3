@@ -1,4 +1,4 @@
-import { LOG_INTO, UPDATE_SCORE } from '../actions/login';
+import { LOG_INTO, UPDATE_PLAYER } from '../actions/login';
 
 const INITIAL_STATE = {
   isLogged: false,
@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 };
 
 const login = (state = INITIAL_STATE, action) => {
-  console.log('meu state movieReducer : ', state, action);
+  console.log('meu state movieReducer : ', state);
   switch (action.type) {
     case LOG_INTO:
       return {
@@ -26,10 +26,12 @@ const login = (state = INITIAL_STATE, action) => {
           gravatarEmail: action.emailGravatar,
         },
       };
-    case UPDATE_SCORE:
+    case UPDATE_PLAYER:
       return {
         ...state,
-        player: { ...state.player,
+        player: {
+          ...state.player,
+          assertions: state.player.assertions + 1,
           score: state.player.score + action.score,
         },
       };

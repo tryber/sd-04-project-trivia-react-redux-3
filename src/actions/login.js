@@ -1,15 +1,16 @@
 import cryptEmail from '../services/cryptoGravatarAPI';
 
 export const LOG_INTO = 'LOG_INTO';
-export const UPDATE_SCORE = 'UPDATE_SCORE';
+export const UPDATE_PLAYER = 'UPDATE_PLAYER';
 
 export const logInto = (login) => ({
   type: LOG_INTO,
-  ...login,
+  name: login.name,
   urlGravatar: cryptEmail(login.emailGravatar),
+  emailGravatar: login.emailGravatar,
 });
 
-export const updateScore = (score) => ({
-  type: UPDATE_SCORE,
-  score,
+export const updatePlayer = (data) => ({
+  type: UPDATE_PLAYER,
+  score: data,
 });

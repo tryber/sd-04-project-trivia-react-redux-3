@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logInto } from '../actions/login';
 import fetchToken from '../actions/token';
-import fetchTrivia from '../actions/trivia';
+import fetchTrivia, { validateToken } from '../actions/trivia';
 
 const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) => (
   <label htmlFor={id}>
@@ -22,7 +22,7 @@ const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) 
 );
 
 const fetchQuestions = async (dispatch) => {
-  const { payload: { response_code: responseCode } } = await dispatch(fetchTrivia());
+  const { payload: { response_code: responseCode } } = await dispatch(validateToken());
   if (responseCode === 3) {
     await dispatch(fetchToken()).then(({ payload }) =>
       localStorage.setItem('token', JSON.stringify(payload)));
@@ -54,17 +54,19 @@ const FormLogin = () => {
       <form>
         {renderLabelInput('insira o email', 'email', 'email', 'emailGravatar', 'input-gravatar-email', user, setUser)}
         {renderLabelInput('insira o nome', 'text', 'name', 'name', 'input-player-name', user, setUser)}
-        <input
-          value="jogar"
-          id="jogar"
-          type="button"
-          data-testid="btn-play"
-          disabled={validateIputs()}
-          onClick={() => {
-            dispatch(logInto(user));
-            fetchQuestions(dispatch);
-          }}
-        />
+        <Link to="Game" >
+          <input
+            value="jogar"
+            id="jogar"
+            type="button"
+            data-testid="btn-play"
+            disabled={validateIputs()}
+            onClick={() => {
+              dispatch(logInto(user));
+              fetchQuestions(dispatch);
+            }}
+          />
+        </Link>
         {renderButtonSettings()}
       </form>
     </div>

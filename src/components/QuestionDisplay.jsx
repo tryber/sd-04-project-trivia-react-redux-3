@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { buttonAnswer, disableButton, enableNextButton } from '../actions/buttonAnswer';
 import { updateScore } from '../actions/login';
 import Header from '../components/Header';
-
 class QuestionsDisplay extends React.Component {
   constructor(props) {
     super(props);
@@ -12,16 +11,13 @@ class QuestionsDisplay extends React.Component {
       answersToDisplay: [],
       timer: 30, // temporario depois usar o timer do Store
     };
-
     this.answerListMaker = this.answerListMaker.bind(this);
     this.shuffleAnswerList = this.shuffleAnswerList.bind(this);
     this.scoreCalculator = this.scoreCalculator.bind(this);
   }
-
   componentDidMount() {
     this.answerListMaker();
   }
-
   shuffleAnswerList(listInput) {
     this.bar = 0; // because CC Expected 'this' to be used by class method 'shuffleAnswerList'
     const list = listInput;
@@ -32,7 +28,6 @@ class QuestionsDisplay extends React.Component {
     }
     return list;
   }
-
   answerListMaker() {
     const questionToDisplay = this.props.question;
     const answerList = [{ testId: 'correct-answer', answer: questionToDisplay.correct_answer, borderStyle: '3px solid rgb(6, 240, 15)' }];
@@ -41,7 +36,6 @@ class QuestionsDisplay extends React.Component {
     ));
     return this.shuffleAnswerList(answerList);
   }
-
   scoreCalculator(testId) {
     const { difficulty } = this.props.question;
     let difficultyPoints = 0;
@@ -64,7 +58,6 @@ class QuestionsDisplay extends React.Component {
     localStorage.setItem('state', JSON.stringify({ player: this.props.login.player }));
     this.props.enableNextButton();
   }
-
   render() {
     const { answersToDisplay } = this.state;
     const questionToDisplay = this.props.question;
@@ -97,21 +90,18 @@ class QuestionsDisplay extends React.Component {
     );
   }
 }
-
 const mapStateToProps = (state) => ({
   borderColorChange: state.ButtonAnswer.borderColorChange,
   answerButtonEnable: state.ButtonAnswer.answerButtonEnable,
   nextButtonEnable: state.ButtonAnswer.nextButtonEnable,
   login: state.login,
 });
-
 const mapDispatchToProps = (dispatch) => ({
   buttonAnswer: () => dispatch(buttonAnswer()),
   disableButton: () => dispatch(disableButton()),
   enableNextButton: () => dispatch(enableNextButton()),
   updateScore: (e) => dispatch(updateScore(e)),
 });
-
 QuestionsDisplay.propTypes = {
   question: PropTypes.shape(),
   login: PropTypes.shape(),
@@ -123,10 +113,8 @@ QuestionsDisplay.propTypes = {
   answerButtonEnable: PropTypes.func.isRequired,
   borderColorChange: PropTypes.bool.isRequired,
 };
-
 QuestionsDisplay.defaultProps = {
   question: null,
   login: null,
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsDisplay);
