@@ -14,5 +14,3 @@ export const updatePlayer = (data) => ({
   type: UPDATE_PLAYER,
   score: data,
 });
-
-

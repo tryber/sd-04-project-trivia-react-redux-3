@@ -13,12 +13,12 @@ const requestTriviaSuccess = (data) => ({
 const resultTokenValidate = (data) => ({
   type: VALIDATE_TOKEN,
   payload: data,
-})
+});
+
 const receiveTriviaFailure = (error) => ({
   type: RECEIVE_TRIVIA_FAILURE,
   payload: error,
 });
-
 
 export function validateToken(category, difficulty, type) {
   return (dispatch, state) => {
@@ -29,7 +29,7 @@ export function validateToken(category, difficulty, type) {
         (data) => dispatch(resultTokenValidate(data)),
         (error) => dispatch(receiveTriviaFailure(error.message)),
       );
-  };
+  }
 };
 
 export default function fetchTrivia(token, category, difficulty, type) {

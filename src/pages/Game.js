@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {updatePlayer} from '../actions/login';
+import { updatePlayer } from '../actions/login';
 import Header from '../components/Header';
 import Timer from '../components/Timer';
 import QuestionDisplay2 from '../components/QuestionDisplay2';
 
 /*eslint max-lines-per-function: ["error", 200]*/
+
 function Game({ history }) {
   const [timer, setTimer] = useState(30);
   const [idInterval, setIdInterval] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState([]);
   const [idQuestion, setIdQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
-  const { trivia : { results: questions } } = useSelector(state => state.trivia);
-  const { player } = useSelector(state => state.login);
+  const { trivia: { results: questions } } = useSelector((state) => state.trivia);
+  const { player } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const difficulty = { hard: 3, medium: 2, easy: 1 };
   
@@ -34,7 +35,7 @@ function Game({ history }) {
   const handleAnswer = () => {
     clearInterval(idInterval);
     setIdInterval(null);
-  }
+  };
 
   const getScore = () => (10 + (timer * difficulty[questions[idQuestion].difficulty]));
 
@@ -43,7 +44,7 @@ function Game({ history }) {
       {
         dispatch(updatePlayer(getScore()));
       }
-  }
+  };
 
   const covertRanking = ({ name, score, gravatarEmail }) => ({ name, score, gravatarEmail });
 
@@ -58,7 +59,7 @@ function Game({ history }) {
     history.push('/Feedback');
    }
     setIdQuestion(state => state + 1);
-  }
+  };
 
   useEffect(() => {
     if(timer == 0) {
@@ -78,8 +79,8 @@ function Game({ history }) {
     <div>
       <Header />
       <Timer  stateProps={stateProps} />
-      <QuestionDisplay2 stateProps={stateProps} handleAnswer={handleAnswer}  />
-      {(selectedAnswer || (timer == 0)) && <button onClick={() => handleNext()}>next</button>}
+      <QuestionDisplay2 stateProps={stateProps} handleAnswer={handleAnswer} />
+      {(selectedAnswer || (timer === 0)) && <button onClick={() => handleNext()}>next</button>}
     </div> 
   ) : (
     <div>
