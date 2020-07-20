@@ -32,7 +32,7 @@ const login = (state = INITIAL_STATE, action) => {
         player: {
           ...state.player,
           assertions: state.player.assertions + 1,
-          score: action.score,
+          score: state.player.score + action.score,
         },
       };
     default:
