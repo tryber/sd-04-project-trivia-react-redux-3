@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import token from './token';
 import login from './login';
-import ButtonAnswer from './ButtonAnswer';
+import trivia from './trivia';
 
 const rootReducer = combineReducers({
   login,
   token,
-  ButtonAnswer,
+  trivia,
 });
 
 export default rootReducer;
