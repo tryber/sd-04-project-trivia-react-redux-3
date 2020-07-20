@@ -17,6 +17,21 @@ const validateAnswer = ({timer, selectedAnswer}, questions, dispatch) => {
   }
 };
 
+const covertRanking = ({ name, score, gravatarEmail }) => ({ name, score, gravatarEmail });
+
+const handleNext = (setGame, { idQuestion, idInterval }, player, history) => {
+  setGame((state) => ({ ...state, selectedAnswer: '' }));
+  setGame((state) => ({ ...state, timer: 30 }));
+ if (idQuestion === 4) {
+   clearInterval(idInterval);
+   localStorage.getItem('ranking') ?
+     localStorage.setItem('ranking', JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), covertRanking(player)])) :
+     localStorage.setItem('ranking', JSON.stringify([covertRanking(player)])); 
+   history.push('/Feedback');
+ }
+  setGame((state) => ({ ...state, idQuestion: state.idQuestion + 1 }));
+};
+
 function Game({ history }) {
   const [game, setGame] = useState({
     timer: 30,
@@ -33,21 +48,6 @@ function Game({ history }) {
   const handleAnswer = () => {
     clearInterval(idInterval);
     setGame((state) => ({ ...state, idInterval: null }));
-  };
-
-  const covertRanking = ({ name, score, gravatarEmail }) => ({ name, score, gravatarEmail });
-
-  const handleNext = () => {
-    setGame((state) => ({ ...state, selectedAnswer: '' }));
-    setGame((state) => ({ ...state, timer: 30 }));
-   if (idQuestion === 4) {
-     clearInterval(idInterval);
-     localStorage.getItem('ranking') ?
-       localStorage.setItem('ranking', JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), covertRanking(player)])) :
-       localStorage.setItem('ranking', JSON.stringify([covertRanking(player)])); 
-     history.push('/Feedback');
-   }
-    setGame((state) => ({ ...state, idQuestion: state.idQuestion + 1 }));
   };
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function Game({ history }) {
       <Header />
       <Timer setGame={setGame} game={game}/>
       <QuestionDisplay2 setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions}/>
-      {(selectedAnswer || (timer === 0)) && <button onClick={() => handleNext()}>next</button>}
+      {(selectedAnswer || (timer === 0)) && <button onClick={() => handleNext(setGame, game, player, history)}>next</button>}
     </div>
   ) : (
     <div>
