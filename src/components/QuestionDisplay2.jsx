@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function QuestionDisplay2({ setGame, handleAnswer, game, questions }) {
   const { timer, idQuestion, selectedAnswer, currentQuestion } = game;
@@ -46,5 +47,5 @@ QuestionDisplay2.propTypes = {
   setGame: PropTypes.func.isRequired,
   handleAnswer: PropTypes.func.isRequired,
   game: PropTypes.objectOf(PropTypes.any).isRequired,
-  questions: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

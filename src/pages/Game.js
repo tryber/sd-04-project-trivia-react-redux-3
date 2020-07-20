@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { updatePlayer } from '../actions/login';
 import Header from '../components/Header';
@@ -50,7 +51,7 @@ function Game({ history }) {
   };
 
   useEffect(() => {
-    if(timer === 0) {
+    if (timer === 0) {
       handleAnswer();
     }
   }, [timer]);
@@ -67,7 +68,8 @@ function Game({ history }) {
     <div>
       <Header />
       <Timer setGame={setGame} game={game} />
-      <QuestionDisplay2 setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions} />
+      <QuestionDisplay2
+        setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions} />
       {(selectedAnswer || (timer === 0)) && <button onClick={() =>
         handleNext(setGame, game, player, history)}>next</button>}
     </div>
