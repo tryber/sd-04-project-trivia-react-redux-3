@@ -29,8 +29,8 @@ export function validateToken(category, difficulty, type) {
         (data) => dispatch(resultTokenValidate(data)),
         (error) => dispatch(receiveTriviaFailure(error.message)),
       );
-  }
-};
+  };
+}
 
 export default function fetchTrivia(token, category, difficulty, type) {
   return (dispatch, state) => {
