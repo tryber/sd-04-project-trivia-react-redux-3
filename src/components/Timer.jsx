@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 
-export default function Timer({ stateProps: { setIdInterval, setTimer, timer, idQuestion, idInterval } }) {
+export default function Timer({ setGame, game }) {
+  const { timer, idInterval, idQuestion } = game;
+
   useEffect(() => {
     if (idInterval === null) {
       const interval = setInterval(() => {
-        setTimer((seconds) => seconds - 1);
+        setGame((state) => ({ ...state, timer: state.timer - 1 }));
       }, 1000);
-      setIdInterval(interval);
+      setGame((state) => ({ ...state, idInterval: interval }));
     }
   }, [idQuestion]);
 

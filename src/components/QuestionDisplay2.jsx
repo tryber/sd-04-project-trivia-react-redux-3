@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-export default function QuestionDisplay2({ stateProps: { idQuestion, setCurrentQuestion, currentQuestion, questions, setSelectedAnswer, selectedAnswer, timer }, handleAnswer }) {
+export default function QuestionDisplay2({ setGame , handleAnswer, game, questions }) {
+  const { timer, idQuestion, selectedAnswer, currentQuestion } = game;
   const [questionLocal, setQuestionLocal] = useState(currentQuestion);
+
   const suff = (array) => array.sort(() => Math.random() - 0.5);
 
   const answerListMaker = ({ correct_answer, incorrect_answers }) =>
@@ -10,7 +12,7 @@ export default function QuestionDisplay2({ stateProps: { idQuestion, setCurrentQ
 
   useEffect(() => {
     const questionRandom = answerListMaker(questions[idQuestion]);
-    setCurrentQuestion(questionRandom);
+    setGame((state) => ({ ...state, currentQuestion: questionRandom }));
     setQuestionLocal(questionRandom);
   }, [idQuestion]);
 
@@ -27,7 +29,7 @@ export default function QuestionDisplay2({ stateProps: { idQuestion, setCurrentQ
             data-testid={answer.testId}
             onClick={() => {
               console.log('answer.answer', answer.answer);
-              setSelectedAnswer(answer.answer);
+              setGame((state) => ({ ...state, selectedAnswer: answer.answer }));
               handleAnswer();
             }}
           >

@@ -6,51 +6,40 @@ import Header from '../components/Header';
 import Timer from '../components/Timer';
 import QuestionDisplay2 from '../components/QuestionDisplay2';
 
-/*eslint max-lines-per-function: ["error", 200]*/
+const difficulty = { hard: 3, medium: 2, easy: 1 };
+
+const getScore = (timer, questions) => (10 + (timer * difficulty[questions.difficulty]));
+
+const validateAnswer = ({timer, selectedAnswer}, questions, dispatch) => {
+  if ((selectedAnswer) && selectedAnswer === questions.correct_answer)
+  {
+    dispatch(updatePlayer(getScore(timer, questions)));
+  }
+};
 
 function Game({ history }) {
-  const [timer, setTimer] = useState(30);
-  const [idInterval, setIdInterval] = useState(null);
-  const [currentQuestion, setCurrentQuestion] = useState([]);
-  const [idQuestion, setIdQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [game, setGame] = useState({
+    timer: 30,
+    idInterval: null,
+    idQuestion: 0,
+    selectedAnswer: '',
+    currentQuestion: [],
+  });
   const { trivia: { results: questions } } = useSelector((state) => state.trivia);
   const { player } = useSelector((state) => state.login);
   const dispatch = useDispatch();
-  const difficulty = { hard: 3, medium: 2, easy: 1 };
-
-  const stateProps = {
-    setTimer,
-    setIdInterval,
-    setSelectedAnswer,
-    setCurrentQuestion,
-    timer,
-    idInterval,
-    idQuestion,
-    selectedAnswer,
-    questions,
-    currentQuestion,
-  };
-
+  const { timer, idInterval, idQuestion, selectedAnswer } = game;
+  
   const handleAnswer = () => {
     clearInterval(idInterval);
-    setIdInterval(null);
-  };
-
-  const getScore = () => (10 + (timer * difficulty[questions[idQuestion].difficulty]));
-
-  const validateAnswer = () => {
-    if ((selectedAnswer) && selectedAnswer === questions[idQuestion].correct_answer)
-    {
-      dispatch(updatePlayer(getScore()));
-    }
+    setGame((state) => ({ ...state, idInterval: null }));
   };
 
   const covertRanking = ({ name, score, gravatarEmail }) => ({ name, score, gravatarEmail });
 
   const handleNext = () => {
-    setSelectedAnswer('');
-    setTimer(30);
+    setGame((state) => ({ ...state, selectedAnswer: '' }));
+    setGame((state) => ({ ...state, timer: 30 }));
    if (idQuestion === 4) {
      clearInterval(idInterval);
      localStorage.getItem('ranking') ?
@@ -58,7 +47,7 @@ function Game({ history }) {
        localStorage.setItem('ranking', JSON.stringify([covertRanking(player)])); 
      history.push('/Feedback');
    }
-    setIdQuestion((state) => state + 1);
+    setGame((state) => ({ ...state, idQuestion: state.idQuestion + 1 }));
   };
 
   useEffect(() => {
@@ -72,14 +61,14 @@ function Game({ history }) {
   }, [player]);
 
   useEffect(() => {
-    validateAnswer();
+    validateAnswer(game, questions[idQuestion], dispatch);
   }, [selectedAnswer]);
 
   return (questions.length > 0) ? (
     <div>
       <Header />
-      <Timer stateProps={stateProps} />
-      <QuestionDisplay2 stateProps={stateProps} handleAnswer={handleAnswer} />
+      <Timer setGame={setGame} game={game}/>
+      <QuestionDisplay2 setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions}/>
       {(selectedAnswer || (timer === 0)) && <button onClick={() => handleNext()}>next</button>}
     </div>
   ) : (
