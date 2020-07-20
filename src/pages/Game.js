@@ -24,9 +24,11 @@ const handleNext = (setGame, { idQuestion, idInterval }, player, history) => {
   setGame((state) => ({ ...state, timer: 30 }));
   if (idQuestion === 4) {
     clearInterval(idInterval);
-    localStorage.getItem('ranking') ?
-      localStorage.setItem('ranking', JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), covertRanking(player)])) :
-      localStorage.setItem('ranking', JSON.stringify([covertRanking(player)])); 
+    if (localStorage.getItem('ranking')) {
+      localStorage.setItem('ranking', JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), covertRanking(player)]));
+    } else {
+      localStorage.setItem('ranking', JSON.stringify([covertRanking(player)]));
+    }  
     history.push('/Feedback');
   }
   setGame((state) => ({ ...state, idQuestion: state.idQuestion + 1 }));
@@ -57,7 +59,7 @@ function Game({ history }) {
   }, [timer]);
 
   useEffect(() => {
-    localStorage.setItem('state', JSON.stringify({ player: player }));
+    localStorage.setItem('state', JSON.stringify({ player }));
   }, [player]);
 
   useEffect(() => {
@@ -69,9 +71,11 @@ function Game({ history }) {
       <Header />
       <Timer setGame={setGame} game={game} />
       <QuestionDisplay2
-        setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions} />
+        setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions}
+      />
       {(selectedAnswer || (timer === 0)) && <button onClick={() =>
-        handleNext(setGame, game, player, history)}>next</button>}
+        handleNext(setGame, game, player, history)}>next</button>
+      }
     </div>
   ) : (
     <div>
