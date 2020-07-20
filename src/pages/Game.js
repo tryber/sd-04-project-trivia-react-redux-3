@@ -28,7 +28,7 @@ const handleNext = (setGame, { idQuestion, idInterval }, player, history) => {
       localStorage.setItem('ranking', JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), covertRanking(player)]));
     } else {
       localStorage.setItem('ranking', JSON.stringify([covertRanking(player)]));
-    }  
+    }
     history.push('/Feedback');
   }
   setGame((state) => ({ ...state, idQuestion: state.idQuestion + 1 }));
@@ -73,8 +73,10 @@ function Game({ history }) {
       <QuestionDisplay2
         setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions}
       />
-      {(selectedAnswer || (timer === 0)) && <button onClick={() =>
-        handleNext(setGame, game, player, history)}>next</button>
+      {(selectedAnswer || (timer === 0)) &&
+        <button onClick={() => handleNext(setGame, game, player, history)}>
+          next
+        </button>
       }
     </div>
   ) : (
