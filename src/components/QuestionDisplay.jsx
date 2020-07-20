@@ -9,7 +9,7 @@ class QuestionsDisplay extends React.Component {
         response_code: 0,
         results: [
           {
-            category: 'Entertainment: Video Games',
+            category: 'Entertainment: Video Gamess',
             type: 'boolean',
             difficulty: 'hard',
             question: 'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
