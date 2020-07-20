@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Configuration from './pages/Configuration';
 import Game from './pages/Game';
-import Ranking from './pages/Ranking'
+import Ranking from './pages/Ranking';
 import './App.css';
 
 export default function App() {
