@@ -43,7 +43,7 @@ export default function QuestionDisplay2({ setGame, handleAnswer, game, question
         </div>
       </div>
     );
-  };
+  }
   return (
     <div>...loading</div>
   );
