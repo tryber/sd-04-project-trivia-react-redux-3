@@ -102,11 +102,11 @@ const mapDispatchToProps = (dispatch) => ({
   storeConfiguration: (e) => dispatch(storeConfiguration(e)),
 });
 
-QuestionsDisplay.propTypes = {
+ConfigurationComponent.propTypes = {
   storeConfiguration: PropTypes.shape(),
 };
 
-QuestionsDisplay.defaultProps = {
+ConfigurationComponent.defaultProps = {
   storeConfiguration: null,
 };
 
