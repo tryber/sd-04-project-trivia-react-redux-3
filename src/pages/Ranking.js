@@ -13,7 +13,6 @@ export default function Ranking() {
             <img src={element.picture} />
             <span data-testid={`player-name-${index}`}>{element.name}</span>
             <span data-testid={`player-score-${index}`}> | {element.score}</span>
-            {}
           </li>
         ))}
       </ol>
