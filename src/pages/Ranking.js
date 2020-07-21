@@ -17,7 +17,7 @@ export default function Ranking() {
       <h2 data-testid="ranking-title">Ranking</h2>
       <ol>{renderPlayers()}</ol>
       <Link to="/">
-        <button data-testid="btn-go-home">Home</button>
+        <button data-testid="btn-go-home"> Home</button>
       </Link>
     </div>
   );
