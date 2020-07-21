@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 export default function QuestionDisplay2({ setGame, handleAnswer, game, questions }) {
   const { timer, idQuestion, selectedAnswer, currentQuestion } = game;
   let questionC = currentQuestion;
-  
   const suff = (array) => array.sort(() => Math.random() - 0.5);
 
   const answerListMaker = ({ correct_answer, incorrect_answers }) =>
@@ -17,32 +16,32 @@ export default function QuestionDisplay2({ setGame, handleAnswer, game, question
     questionC = questionRandom;
   }, [idQuestion]);
 
-    return (
+  return (
+    <div>
+      <p data-testid="question-category">Category: {questions[idQuestion].category}</p>
+      <p data-testid="question-text">Question: {questions[idQuestion].question}</p>
       <div>
-        <p data-testid="question-category">Category: {questions[idQuestion].category}</p>
-        <p data-testid="question-text">Question: {questions[idQuestion].question}</p>
-        <div>
-          <p>Please chose an answer:</p>
-          {questionC.map((answer) => (
-            <button
-              key={answer.answer}
-              className={`${!!selectedAnswer || (timer === 0) ? answer.class : ''}`}
-              data-testid={answer.testId}
-              disabled={!!selectedAnswer || timer === 0}
-              onClick={() => {
-                console.log('answer.answer', answer.answer);
-                setGame((state) => ({ ...state, selectedAnswer: answer.answer }));
-                handleAnswer();
-              }}
-            >
-              {answer.answer}
-            </button>
-          ),
-          )}
-        </div>
+        <p>Please chose an answer:</p>
+        {questionC.map((answer) => (
+          <button
+            key={answer.answer}
+            className={`${!!selectedAnswer || (timer === 0) ? answer.class : ''}`}
+            data-testid={answer.testId}
+            disabled={!!selectedAnswer || timer === 0}
+            onClick={() => {
+              console.log('answer.answer', answer.answer);
+              setGame((state) => ({ ...state, selectedAnswer: answer.answer }));
+              handleAnswer();
+            }}
+          >
+            {answer.answer}
+          </button>
+        ),
+        )}
       </div>
-    );
-  }
+    </div>
+  );
+}
 
 QuestionDisplay2.propTypes = {
   setGame: PropTypes.func.isRequired,
