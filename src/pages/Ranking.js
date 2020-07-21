@@ -10,7 +10,7 @@ export default function Ranking() {
       <ol>
         {players.map((element, index) => (
           <li key={`${element.name}-${index}`}>
-            <img src={element.picture} />
+            <img src={element.picture} alt="imagem do gravatar"/>
             <span data-testid={`player-name-${index}`}>{element.name}</span>
             <span data-testid={`player-score-${index}`}> | {element.score}</span>
           </li>

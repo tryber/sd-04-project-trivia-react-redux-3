@@ -9,7 +9,7 @@ import QuestionDisplay2 from '../components/QuestionDisplay2';
 
 const difficulty = { hard: 3, medium: 2, easy: 1 };
 
-const getScore = (timer, questions) => 10 + timer * difficulty[questions.difficulty];
+const getScore = (timer, questions) => 10 + (timer * difficulty[questions.difficulty]);
 
 const validateAnswer = ({ timer, selectedAnswer }, questions, dispatch) => {
   if (selectedAnswer && selectedAnswer === questions.correct_answer) {
@@ -19,7 +19,7 @@ const validateAnswer = ({ timer, selectedAnswer }, questions, dispatch) => {
 
 const handleNext = (setGame, { idQuestion, idInterval }, player, urlGravatar, history) => {
   const covertRanking = ({ name, score }) => ({ name, score });
-  let newRanking = covertRanking(player);
+  const newRanking = covertRanking(player);
   newRanking.picture = urlGravatar;
   setGame((state) => ({ ...state, selectedAnswer: '' }));
   setGame((state) => ({ ...state, timer: 30 }));
