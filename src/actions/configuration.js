@@ -2,7 +2,7 @@ export const STORE_CONFIGURATION = 'STORE_CONFIGURATION';
 
 const storeConfiguration = (apiFilters) => ({
   type: STORE_CONFIGURATION,
-  apiFilters
+  apiFilters,
 });
 
-export default storeConfiguration
+export default storeConfiguration;

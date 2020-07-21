@@ -12,7 +12,7 @@ export default (state = initialState, { type, apiFilters }) => {
   console.log(type, apiFilters);
   switch (type) {
     case STORE_CONFIGURATION:
-      return { ...state, apiFilters};
+      return { ...state, apiFilters };
     default:
       return state;
   }
