@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 export default function Feedback() {
-  const {
-    player: { score, assertions },
-  } = useSelector((state) => state.login);
+  const { score, assertions } = useSelector((state) => state.login);
   return (
     <div>
       <div>

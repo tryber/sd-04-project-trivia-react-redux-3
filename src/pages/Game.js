@@ -17,7 +17,7 @@ const validateAnswer = ({ timer, selectedAnswer }, questions, dispatch) => {
   }
 };
 
-const covertRanking = ({ name, score, gravatarEmail }) => ({ name, score, gravatarEmail });
+const covertRanking = ({ name, score , picture }) => ({ name, score, picture });
 
 const handleNext = (setGame, { idQuestion, idInterval }, player, history) => {
   setGame((state) => ({ ...state, selectedAnswer: '' }));
@@ -43,7 +43,7 @@ function Game({ history }) {
     currentQuestion: [],
   });
   const { trivia: { results: questions } } = useSelector((state) => state.trivia);
-  const { player } = useSelector((state) => state.login);
+  const player = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const { timer, idInterval, idQuestion, selectedAnswer } = game;
 

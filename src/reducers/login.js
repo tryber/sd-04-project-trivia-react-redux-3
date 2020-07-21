@@ -2,13 +2,11 @@ import { LOG_INTO, UPDATE_PLAYER } from '../actions/login';
 
 const INITIAL_STATE = {
   isLogged: false,
-  urlGravatar: 'https://www.gravatar.com/avatar/',
-  player: {
-    name: '',
-    assertions: 0,
-    score: 0,
-    gravatarEmail: '',
-  },
+  email: '',
+  name: '',
+  assertions: 0,
+  score: 0,
+  picture: 'https://www.gravatar.com/avatar/',
 };
 
 const login = (state = INITIAL_STATE, action) => {
@@ -18,22 +16,17 @@ const login = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLogged: true,
-        urlGravatar: action.urlGravatar,
-        player: {
-          name: action.name,
-          assertions: 0,
-          score: 0,
-          gravatarEmail: action.emailGravatar,
-        },
+        email: action.emailGravatar,
+        name: action.name,
+        assertions: 0,
+        score: 0,
+        picture: action.urlGravatar,
       };
     case UPDATE_PLAYER:
       return {
         ...state,
-        player: {
-          ...state.player,
-          assertions: state.player.assertions + 1,
-          score: state.player.score + action.score,
-        },
+        assertions: state.assertions + 1,
+        score: state.score + action.score,
       };
     default:
       return state;
