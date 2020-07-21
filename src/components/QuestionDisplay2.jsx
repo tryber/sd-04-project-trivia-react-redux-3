@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 export default function QuestionDisplay2({ setGame, handleAnswer, game, questions }) {
   const { timer, idQuestion, selectedAnswer, currentQuestion } = game;
   let questionC = currentQuestion;
-  const suff = (array) => array.sort(() => Math.random() - 0.5);
+  const shuffle  = (array) => array.sort(() => Math.random() - 0.5);
 
   const answerListMaker = ({ correct_answer, incorrect_answers }) =>
-    suff([{ testId: 'correct-answer', answer: correct_answer, class: 'green-border' }, ...incorrect_answers.map((answer, index) => (
+    shuffle([{ testId: 'correct-answer', answer: correct_answer, class: 'green-border' }, ...incorrect_answers.map((answer, index) => (
       { testId: `wrong-answer-${index}`, answer, class: 'red-border' }))]);
 
   useEffect(() => {

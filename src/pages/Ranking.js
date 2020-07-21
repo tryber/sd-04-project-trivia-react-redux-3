@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import uuid from 'react-uuid';
 
 export default function Ranking() {
   const players = JSON.parse(localStorage.getItem('ranking'));
@@ -8,7 +9,7 @@ export default function Ranking() {
     <div>
       <h2 data-testid="ranking-title">Ranking</h2>
       {players.map((player, index) => (
-        <li key={index}>
+        <li key={uuid()}>
           <img src={player.picture} alt="imagem do gravatar" />
           <span data-testid={`player-name-${index}`}>{player.name}</span>
           <span data-testid={`player-score-${index}`}> | {player.score}</span>
