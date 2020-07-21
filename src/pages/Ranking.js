@@ -6,7 +6,7 @@ export default function Ranking() {
   players.sort((a, b) => b.score - a.score);
   const renderPlayers = () =>
     players.map((element, index) => (
-      <li key={`${element.name}-${index}`}>
+      <li key={`${element.name}`}>
         <img src={element.picture} alt="imagem do gravatar" />
         <span data-testid={`player-name-${index}`}>{element.name}</span>
         <span data-testid={`player-score-${index}`}> | {element.score}</span>
