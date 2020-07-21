@@ -17,7 +17,7 @@ export default function Ranking() {
         ))}
       </ol>
       <Link to="/">
-        <button data-testid="btn-go-home"> Home</button>
+        <button data-testid="btn-go-home">Home</button>
       </Link>
     </div>
   );
