@@ -7,8 +7,8 @@ const Header = () => {
     <div>
       <img src={urlGravatar} alt="gravatarPicture" data-testid="header-profile-picture" />
       <p data-testid="header-player-name">{name}</p>
-      <p data-testid="header-score"> {score}</p>
-      <p> {assertions}</p>
+      <p data-testid="header-score">{score}</p>
+      <p>{assertions}</p>
     </div>
   );
 };
