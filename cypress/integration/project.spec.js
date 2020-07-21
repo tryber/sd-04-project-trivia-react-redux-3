@@ -478,6 +478,10 @@ describe('O _header_ de _feedback_ deve conter as informações da pessoa jogado
     cy.get(HEADER_NAME_SELECTOR).contains(name);
   });
 
+  it('o nome da test a maisr', () => {
+    cy.get(HEADER_SCORE_SELECTOR).should('exist');
+  });
+
   it('o placar com o valor atual está presente no header', () => {
     cy.get(HEADER_SCORE_SELECTOR).should(($el) => {
       const state = JSON.parse(localStorage.getItem(LOCAL_STORAGE_STATE_KEY));
