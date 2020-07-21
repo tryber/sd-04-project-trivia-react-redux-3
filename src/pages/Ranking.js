@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 
 export default function Ranking() {
@@ -21,4 +22,6 @@ export default function Ranking() {
       </Link>
     </div>
   );
-}
+
+
+export default function Ranking()
