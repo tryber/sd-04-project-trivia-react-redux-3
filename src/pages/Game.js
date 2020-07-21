@@ -9,25 +9,30 @@ import QuestionDisplay2 from '../components/QuestionDisplay2';
 
 const difficulty = { hard: 3, medium: 2, easy: 1 };
 
-const getScore = (timer, questions) => (10 + (timer * difficulty[questions.difficulty]));
+const getScore = (timer, questions) => 10 + timer * difficulty[questions.difficulty];
 
 const validateAnswer = ({ timer, selectedAnswer }, questions, dispatch) => {
-  if ((selectedAnswer) && selectedAnswer === questions.correct_answer) {
+  if (selectedAnswer && selectedAnswer === questions.correct_answer) {
     dispatch(updatePlayer(getScore(timer, questions)));
   }
 };
 
-const covertRanking = ({ name, score, gravatarEmail }) => ({ name, score, gravatarEmail });
-
-const handleNext = (setGame, { idQuestion, idInterval }, player, history) => {
+const handleNext = (setGame, { idQuestion, idInterval }, player, urlGravatar, history) => {
+  const covertRanking = ({ name, score }) => ({ name, score });
+  let newRanking = covertRanking(player);
+  newRanking.picture = urlGravatar;
   setGame((state) => ({ ...state, selectedAnswer: '' }));
   setGame((state) => ({ ...state, timer: 30 }));
   if (idQuestion === 4) {
     clearInterval(idInterval);
     if (localStorage.getItem('ranking')) {
-      localStorage.setItem('ranking', JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), covertRanking(player)]));
+      console.log('jogador e gravatar', covertRanking(player));
+      localStorage.setItem(
+        'ranking',
+        JSON.stringify([...JSON.parse(localStorage.getItem('ranking')), newRanking]),
+      );
     } else {
-      localStorage.setItem('ranking', JSON.stringify([covertRanking(player)]));
+      localStorage.setItem('ranking', JSON.stringify(newRanking));
     }
     history.push('/Feedback');
   }
@@ -42,8 +47,10 @@ function Game({ history }) {
     selectedAnswer: '',
     currentQuestion: [],
   });
-  const { trivia: { results: questions } } = useSelector((state) => state.trivia);
-  const { player } = useSelector((state) => state.login);
+  const {
+    trivia: { results: questions },
+  } = useSelector((state) => state.trivia);
+  const { player, urlGravatar } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const { timer, idInterval, idQuestion, selectedAnswer } = game;
 
@@ -66,23 +73,27 @@ function Game({ history }) {
     validateAnswer(game, questions[idQuestion], dispatch);
   }, [selectedAnswer]);
 
-  return (questions.length > 0) ? (
+  return questions.length > 0 ? (
     <div>
       <Header />
       <Timer setGame={setGame} game={game} />
       <QuestionDisplay2
-        setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions}
+        setGame={setGame}
+        handleAnswer={handleAnswer}
+        game={game}
+        questions={questions}
       />
-      {(selectedAnswer || (timer === 0)) &&
-        <button data-testid="btn-next" onClick={() => handleNext(setGame, game, player, history)}>
+      {(selectedAnswer || timer === 0) && (
+        <button
+          data-testid="btn-next"
+          onClick={() => handleNext(setGame, game, player, urlGravatar, history)}
+        >
           next
         </button>
-      }
+      )}
     </div>
   ) : (
-    <div>
-      loading...
-    </div>
+    <div>loading...</div>
   );
 }
 
