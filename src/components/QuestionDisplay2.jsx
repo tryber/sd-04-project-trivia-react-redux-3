@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 export default function QuestionDisplay2({ setGame, handleAnswer, game, questions }) {
   const { timer, idQuestion, selectedAnswer, currentQuestion } = game;
-  const [questionLocal, setQuestionLocal] = useState(currentQuestion);
-
+  let questionC = currentQuestion;
+  
   const suff = (array) => array.sort(() => Math.random() - 0.5);
 
   const answerListMaker = ({ correct_answer, incorrect_answers }) =>
@@ -14,17 +14,16 @@ export default function QuestionDisplay2({ setGame, handleAnswer, game, question
   useEffect(() => {
     const questionRandom = answerListMaker(questions[idQuestion]);
     setGame((state) => ({ ...state, currentQuestion: questionRandom }));
-    setQuestionLocal(questionRandom);
+    questionC = questionRandom;
   }, [idQuestion]);
 
-  if (questionLocal.length > 0) {
     return (
       <div>
         <p data-testid="question-category">Category: {questions[idQuestion].category}</p>
         <p data-testid="question-text">Question: {questions[idQuestion].question}</p>
         <div>
           <p>Please chose an answer:</p>
-          {questionLocal.map((answer) => (
+          {questionC.map((answer) => (
             <button
               key={answer.answer}
               className={`${!!selectedAnswer || (timer === 0) ? answer.class : ''}`}
@@ -44,10 +43,6 @@ export default function QuestionDisplay2({ setGame, handleAnswer, game, question
       </div>
     );
   }
-  return (
-    <div>...loading</div>
-  );
-}
 
 QuestionDisplay2.propTypes = {
   setGame: PropTypes.func.isRequired,
