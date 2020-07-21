@@ -29,7 +29,7 @@ export default function QuestionDisplay2({ setGame, handleAnswer, game, question
               key={answer.answer}
               className={`${!!selectedAnswer || (timer === 0) ? answer.class : ''}`}
               data-testid={answer.testId}
-              disabled={!!selectedAnswer}
+              disabled={!!selectedAnswer || timer === 0}
               onClick={() => {
                 console.log('answer.answer', answer.answer);
                 setGame((state) => ({ ...state, selectedAnswer: answer.answer }));

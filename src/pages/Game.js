@@ -74,7 +74,7 @@ function Game({ history }) {
         setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions}
       />
       {(selectedAnswer || (timer === 0)) &&
-        <button onClick={() => handleNext(setGame, game, player, history)}>
+        <button data-testid="btn-next" onClick={() => handleNext(setGame, game, player, history)}>
           next
         </button>
       }
