@@ -17,7 +17,7 @@ const validateAnswer = ({ timer, selectedAnswer }, questions, dispatch) => {
   }
 };
 
-const covertRanking = ({ name, score , picture }) => ({ name, score, picture });
+const covertRanking = ({ name, score, picture }) => ({ name, score, picture });
 
 const handleNext = (setGame, { idQuestion, idInterval }, player, history) => {
   setGame((state) => ({ ...state, selectedAnswer: '' }));

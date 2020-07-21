@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const { score, assertions, name , picture } = useSelector((state) => state.login);
+  const { score, assertions, name, picture } = useSelector((state) => state.login);
   return (
     <div>
       <img src={picture} alt="gravatarPicture" data-testid="header-profile-picture" />
