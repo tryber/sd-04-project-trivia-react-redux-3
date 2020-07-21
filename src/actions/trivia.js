@@ -1,5 +1,5 @@
 import { getTrivia } from '../services/triviaAPI';
-import { REQUEST_TRIVIA, RECEIVE_TRIVIA_SUCCESS, RECEIVE_TRIVIA_FAILURE, VALIDATE_TOKEN } from '../types/typeTrivia';
+import { REQUEST_TRIVIA, RECEIVE_TRIVIA_SUCCESS, RECEIVE_TRIVIA_FAILURE, VALIDATE_TOKEN, RESET_TRIVIA } from '../types/typeTrivia';
 
 const requestTrivia = () => ({
   type: REQUEST_TRIVIA,
@@ -19,6 +19,8 @@ const receiveTriviaFailure = (error) => ({
   type: RECEIVE_TRIVIA_FAILURE,
   payload: error,
 });
+
+export const resetTrivia = () => ({ type: RESET_TRIVIA });
 
 export function validateToken(category, difficulty, type) {
   return (dispatch, state) => {

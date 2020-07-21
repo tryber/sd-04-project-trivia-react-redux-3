@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { updatePlayer } from '../actions/login';
+import { resetTrivia } from '../actions/trivia';
 import Header from '../components/Header';
 import Timer from '../components/Timer';
 import QuestionDisplay2 from '../components/QuestionDisplay2';
@@ -19,7 +20,7 @@ const validateAnswer = ({ timer, selectedAnswer }, questions, dispatch) => {
 
 const covertRanking = ({ name, score, picture }) => ({ name, score, picture });
 
-const handleNext = (setGame, { idQuestion, idInterval }, player, history) => {
+const handleNext = (setGame, { idQuestion, idInterval }, player, history, dispatch) => {
   setGame((state) => ({ ...state, selectedAnswer: '' }));
   setGame((state) => ({ ...state, timer: 30 }));
   if (idQuestion === 4) {
@@ -29,6 +30,7 @@ const handleNext = (setGame, { idQuestion, idInterval }, player, history) => {
     } else {
       localStorage.setItem('ranking', JSON.stringify([covertRanking(player)]));
     }
+    dispatch(resetTrivia());
     history.push('/Feedback');
   }
   setGame((state) => ({ ...state, idQuestion: state.idQuestion + 1 }));
@@ -74,7 +76,7 @@ function Game({ history }) {
         setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions}
       />
       {(selectedAnswer || (timer === 0)) &&
-        <button data-testid="btn-next" onClick={() => handleNext(setGame, game, player, history)}>
+        <button data-testid="btn-next" onClick={() => handleNext(setGame, game, player, history, dispatch)}>
           next
         </button>
       }
