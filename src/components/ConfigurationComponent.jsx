@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import categoriesData from '../data/categoriesData';
 import storeConfiguration from '../actions/configuration';
 
@@ -38,9 +39,9 @@ class ConfigurationComponent extends React.Component {
         name="category"
         value={this.state.value}
         onChange={this.handleChange}
-        defaultValue='All'
+        defaultValue="All"
       >
-        <option key='All' value='All'>All</option>
+        <option key="All" value="All">All</option>
         {categoriesData.map((item) => (
           <option key={item.id} value={item.id}>
             {item.name}
@@ -52,15 +53,15 @@ class ConfigurationComponent extends React.Component {
 
   difficultyRender() {
     this.bar = 12; // Without CC asked for using this
-    const difficultyData = ['easy', 'medium', 'hard']
+    const difficultyData = ['easy', 'medium', 'hard'];
     return (
       <select
         name="difficulty"
         value={this.state.value}
         onChange={this.handleChange}
-        defaultValue='All'
+        defaultValue="All"
       >
-        <option key='All' value='All'>All</option>
+        <option key="All" value="All">All</option>
         {difficultyData.map((item) => (
           <option key={item} value={item}>
             {item}
@@ -77,11 +78,11 @@ class ConfigurationComponent extends React.Component {
         name="type"
         value={this.state.value}
         onChange={this.handleChange}
-        defaultValue='All'
+        defaultValue="All"
       >
-        <option key='All' value='All'>All</option>
-        <option key='multiple' value='multiple'>Multiple Choice</option>
-        <option key='boolean' value='boolean'>True False</option>
+        <option key="All" value="All">All</option>
+        <option key="multiple" value="multiple">Multiple Choice</option>
+        <option key="boolean" value="boolean">True False</option>
       </select>
     );
   }
@@ -101,5 +102,12 @@ const mapDispatchToProps = (dispatch) => ({
   storeConfiguration: (e) => dispatch(storeConfiguration(e)),
 });
 
+QuestionsDisplay.propTypes = {
+  storeConfiguration: PropTypes.shape(),
+};
+
+QuestionsDisplay.defaultProps = {
+  storeConfiguration: null,
+};
 
 export default connect(null, mapDispatchToProps)(ConfigurationComponent);
