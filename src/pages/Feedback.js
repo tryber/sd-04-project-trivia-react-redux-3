@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function Feedback() {
   return (
-    <div>
-      hfhfhf
+    <div data-testid="feedback-text">
+      Feedback
     </div>
   );
 }
