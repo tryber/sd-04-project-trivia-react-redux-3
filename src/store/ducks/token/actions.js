@@ -1,5 +1,5 @@
-import { getToken } from '../services/triviaAPI';
-import { REQUEST_TOKEN, RECEIVE_TOKEN_SUCCESS, RECEIVE_TOKEN_FAILURE } from '../types/typeToken';
+import { getToken } from '../../../services/triviaAPI';
+import { REQUEST_TOKEN, RECEIVE_TOKEN_SUCCESS, RECEIVE_TOKEN_FAILURE } from './types';
 
 const requestToken = () => ({
   type: REQUEST_TOKEN,

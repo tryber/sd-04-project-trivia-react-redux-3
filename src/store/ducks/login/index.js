@@ -1,4 +1,4 @@
-import { LOG_INTO, UPDATE_PLAYER } from '../actions/login';
+import { LOG_INTO, UPDATE_PLAYER } from './actions';
 
 const INITIAL_STATE = {
   isLogged: false,

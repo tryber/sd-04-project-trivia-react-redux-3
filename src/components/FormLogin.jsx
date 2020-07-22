@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logInto } from '../actions/login';
-import fetchToken from '../actions/token';
-import fetchTrivia, { validateToken } from '../actions/trivia';
+import { logInto } from '../store/ducks/login/actions';
+import fetchToken from '../store/ducks/token/actions';
+import fetchTrivia, { validateToken } from '../store/ducks/trivia/actions';
 
 const renderLabelInput = (textLabel, type, id, name, dataTestid, user, setUser) => (
   <label htmlFor={id}>
@@ -31,7 +31,7 @@ const fetchQuestions = async (dispatch) => {
 };
 
 const renderButtonSettings = () => (
-  <Link to="Configuration" data-testid="btn-settings">
+  <Link to="/Settings" data-testid="btn-settings">
     <input
       value="configurações"
       id="config"
@@ -54,7 +54,7 @@ const FormLogin = () => {
       <form>
         {renderLabelInput('insira o email', 'email', 'email', 'emailGravatar', 'input-gravatar-email', user, setUser)}
         {renderLabelInput('insira o nome', 'text', 'name', 'name', 'input-player-name', user, setUser)}
-        <Link to="Game" >
+        <Link to="/Game" >
           <input
             value="jogar"
             id="jogar"

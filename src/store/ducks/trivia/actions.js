@@ -1,5 +1,5 @@
-import { getTrivia } from '../services/triviaAPI';
-import { REQUEST_TRIVIA, RECEIVE_TRIVIA_SUCCESS, RECEIVE_TRIVIA_FAILURE, VALIDATE_TOKEN, RESET_TRIVIA } from '../types/typeTrivia';
+import { getTrivia } from '../../../services/triviaAPI';
+import { REQUEST_TRIVIA, RECEIVE_TRIVIA_SUCCESS, RECEIVE_TRIVIA_FAILURE, VALIDATE_TOKEN, RESET_TRIVIA } from './types';
 
 const requestTrivia = () => ({
   type: REQUEST_TRIVIA,
@@ -22,9 +22,9 @@ const receiveTriviaFailure = (error) => ({
 
 export const resetTrivia = () => ({ type: RESET_TRIVIA });
 
-export function validateToken(category, difficulty, type) {
+export function validateToken() {
   return (dispatch, state) => {
-    const { token: { token: tokenT } } = state();
+    const { token: { token: tokenT }, settings : { category, difficulty, type } } = state();
     dispatch(requestTrivia());
     return getTrivia(tokenT, category, difficulty, type)
       .then(
@@ -34,10 +34,9 @@ export function validateToken(category, difficulty, type) {
   };
 }
 
-export default function fetchTrivia(token, category, difficulty, type) {
+export default function fetchTrivia() {
   return (dispatch, state) => {
-    const { token: { token: tokenT } } = state();
-    console.log('token', tokenT);
+    const { token: { token: tokenT }, settings : { category, difficulty, type } } = state();
     dispatch(requestTrivia());
     return getTrivia(tokenT, category, difficulty, type)
       .then(

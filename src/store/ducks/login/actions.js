@@ -1,4 +1,4 @@
-import cryptEmail from '../services/cryptoGravatarAPI';
+import cryptEmail from '../../../services/cryptoGravatarAPI';
 
 export const LOG_INTO = 'LOG_INTO';
 export const UPDATE_PLAYER = 'UPDATE_PLAYER';
