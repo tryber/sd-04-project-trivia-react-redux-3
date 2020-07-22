@@ -2,13 +2,15 @@ import { combineReducers } from 'redux';
 import token from './token';
 import login from './login';
 import trivia from './trivia';
-import StoreConfiguration from '../reducers/StoreConfiguration';
+import settings from './settings';
+import categories from './categories';
 
 const rootReducer = combineReducers({
   login,
   token,
   trivia,
-  StoreConfiguration,
+  settings,
+  categories,
 });
 
 export default rootReducer;

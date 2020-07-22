@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { updatePlayer } from '../actions/login';
-import Header from '../components/Header';
-import Timer from '../components/Timer';
-import QuestionDisplay2 from '../components/QuestionDisplay2';
+import { updatePlayer } from '../../store/ducks/login/actions';
+import { resetTrivia } from '../../store/ducks/trivia/actions';
+import Header from '../../components/Header';
+import Timer from '../../components/Timer';
+import QuestionDisplay2 from '../../components/QuestionDisplay';
 
 const difficulty = { hard: 3, medium: 2, easy: 1 };
 
@@ -17,7 +18,7 @@ const validateAnswer = ({ timer, selectedAnswer }, questions, dispatch) => {
   }
 };
 
-const covertRanking = ({ name, score, gravatarEmail }) => ({ name, score, gravatarEmail });
+const covertRanking = ({ name, score, picture }) => ({ name, score, picture });
 
 const handleNext = (setGame, { idQuestion, idInterval }, player, history) => {
   setGame((state) => ({ ...state, selectedAnswer: '' }));
@@ -43,7 +44,7 @@ function Game({ history }) {
     currentQuestion: [],
   });
   const { trivia: { results: questions } } = useSelector((state) => state.trivia);
-  const { player } = useSelector((state) => state.login);
+  const player = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const { timer, idInterval, idQuestion, selectedAnswer } = game;
 
@@ -57,6 +58,11 @@ function Game({ history }) {
       handleAnswer();
     }
   }, [timer]);
+
+  useEffect(() => () => {
+    dispatch(resetTrivia());
+    clearInterval(idInterval);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('state', JSON.stringify({ player }));
@@ -74,7 +80,10 @@ function Game({ history }) {
         setGame={setGame} handleAnswer={handleAnswer} game={game} questions={questions}
       />
       {(selectedAnswer || (timer === 0)) &&
-        <button data-testid="btn-next" onClick={() => handleNext(setGame, game, player, history)}>
+        <button
+          data-testid="btn-next"
+          onClick={() => handleNext(setGame, game, player, history)}
+        >
           next
         </button>
       }
@@ -91,3 +100,4 @@ Game.propTypes = {
 };
 
 export default withRouter(Game);
+// gr

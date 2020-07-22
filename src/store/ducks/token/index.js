@@ -1,6 +1,4 @@
-import {
-  REQUEST_TOKEN, RECEIVE_TOKEN_SUCCESS, RECEIVE_TOKEN_FAILURE,
-} from '../types/typeToken';
+import { REQUEST_TOKEN, RECEIVE_TOKEN_SUCCESS, RECEIVE_TOKEN_FAILURE } from './types';
 
 const initialState = {
   tokenIsFetching: false,
@@ -8,8 +6,6 @@ const initialState = {
 };
 
 export default (state = initialState, { type, payload }) => {
-  console.log('type', type);
-  console.log('pay', payload);
   switch (type) {
     case REQUEST_TOKEN:
       return { ...state, tokenIsFetching: true };

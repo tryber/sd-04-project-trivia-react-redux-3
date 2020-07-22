@@ -1,10 +1,12 @@
 import React from 'react';
-import ConfigurationComponent from '../components/ConfigurationComponent';
+import { Link } from 'react-router-dom';
+import FormSettings from '../../components/FormSettings';
 
 const Configuration = () => (
   <div>
     <h1 data-testid="settings-title">settings</h1>
-    <ConfigurationComponent />
+    <FormSettings />
+    <Link to="/" >home</Link>
   </div>
 );
 
