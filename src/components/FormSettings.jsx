@@ -48,22 +48,23 @@ const typeRender = (handleChange, settings) => (
   </select>
 );
 
-const  Settings = () => {
+const Settings = () => {
   const [settings, setSettings] = useState({ category: 0, difficulty: '', type: '' });
   const dispatch = useDispatch();
-  const { categories } = useSelector(state => state.categories);
+  const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
 
-  const handleChange = ({ target: { name, value }}) =>
-   { setSettings((state) => ({ ...state, [name]: value })); };
- 
+  const handleChange = ({ target: { name, value } }) => {
+    setSettings((state) => ({ ...state, [name]: value }));
+  };
+
   useEffect(() => {
     dispatch((updateSettings(settings)));
   }, [settings]);
-  
+
   return (
     <div>
       {categoryRender(categories, handleChange, settings)}

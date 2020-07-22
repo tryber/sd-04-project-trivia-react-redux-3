@@ -2,7 +2,7 @@ import { REQUEST_CATEGORY, RECEIVE_CATEGORY_SUCCESS, RECEIVE_CATEGORY_FAILURE } 
 
 const initialState = {
   isFetching: false,
-  categories: [], 
+  categories: [],
 };
 
 export default (state = initialState, { type, payload }) => {

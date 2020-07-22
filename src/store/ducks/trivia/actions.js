@@ -24,7 +24,7 @@ export const resetTrivia = () => ({ type: RESET_TRIVIA });
 
 export function validateToken() {
   return (dispatch, state) => {
-    const { token: { token: tokenT }, settings : { category, difficulty, type } } = state();
+    const { token: { token: tokenT }, settings: { category, difficulty, type } } = state();
     dispatch(requestTrivia());
     return getTrivia(tokenT, category, difficulty, type)
       .then(
@@ -36,7 +36,7 @@ export function validateToken() {
 
 export default function fetchTrivia() {
   return (dispatch, state) => {
-    const { token: { token: tokenT }, settings : { category, difficulty, type } } = state();
+    const { token: { token: tokenT }, settings: { category, difficulty, type } } = state();
     dispatch(requestTrivia());
     return getTrivia(tokenT, category, difficulty, type)
       .then(
