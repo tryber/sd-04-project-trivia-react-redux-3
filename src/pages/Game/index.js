@@ -81,7 +81,7 @@ function Game({ history }) {
       />
       {(selectedAnswer || (timer === 0)) &&
         <button
-          data-testid="btn-next"
+        data-testid="btn-next"
           onClick={() => handleNext(setGame, game, player, history)}
         >
           next
@@ -100,3 +100,4 @@ Game.propTypes = {
 };
 
 export default withRouter(Game);
+// gr
