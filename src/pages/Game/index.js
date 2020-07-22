@@ -59,11 +59,9 @@ function Game({ history }) {
     }
   }, [timer]);
 
-  useEffect(() => {
-    return () => {
-      dispatch(resetTrivia());
-      clearInterval(idInterval);
-    };
+  useEffect(() => () => {
+    dispatch(resetTrivia());
+    clearInterval(idInterval);
   }, []);
 
   useEffect(() => {
