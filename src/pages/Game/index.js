@@ -63,7 +63,7 @@ function Game({ history }) {
     return () => {
       dispatch(resetTrivia());
       clearInterval(idInterval);
-    }
+    };
   }, []);
 
   useEffect(() => {
