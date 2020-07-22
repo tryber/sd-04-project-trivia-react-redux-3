@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import fetchCategories from '../store/ducks/categories/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import fetchCategories from '../store/ducks/categories/actions';
 import updateSettings from '../store/ducks/settings/actions';
 
 const categoryRender = (categories, handleChange, settings) => (
@@ -34,18 +34,18 @@ const difficultyRender = (handleChange, settings) => {
       ))}
     </select>
   );
-}
+};
 
 const typeRender = (handleChange, settings) => (
-    <select
-      name="type"
-      value={settings.type}
-      onChange={handleChange}
-    >
-      <option key="All" value="">All</option>
-      <option key="multiple" value="multiple">Multiple Choice</option>
-      <option key="boolean" value="boolean">True False</option>
-    </select>
+  <select
+    name="type"
+    value={settings.type}
+    onChange={handleChange}
+  >
+    <option key="All" value="">All</option>
+    <option key="multiple" value="multiple">Multiple Choice</option>
+    <option key="boolean" value="boolean">True False</option>
+  </select>
 );
 
 const  Settings = () => {
@@ -55,9 +55,10 @@ const  Settings = () => {
 
   useEffect(() => {
     dispatch(fetchCategories());
-  }, [])
+  }, []);
 
-  const handleChange = ({ target: { name, value }}) => { setSettings((state) => ({ ...state, [name]: value })); };
+  const handleChange = ({ target: { name, value }}) =>
+   { setSettings((state) => ({ ...state, [name]: value })); };
  
   useEffect(() => {
     dispatch((updateSettings(settings)));
@@ -70,6 +71,6 @@ const  Settings = () => {
       {typeRender(handleChange, settings)}
     </div>
   );
-}
+};
 
 export default Settings;
